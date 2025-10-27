@@ -29,16 +29,16 @@ class AuthController extends Controller
 
             switch ($authRole) {
                 case 'admin':
-                    return redirect()->route('dashboard')->with(['success' => 'Login Succussfully!']);
+                    return redirect()->route('admin.dashboard')->with(['success' => 'Login Succussfully!']);
                     break;
 
                 default:
                     return redirect()->route('home')->with(['success' => 'Login Succussfully!']);
                     break;
             }
-
-            return redirect()->back()->with(['authError' => 'Email & password are not matched in our records!']);
         }
+
+        return redirect()->back()->with(['authError' => 'Email & password are not matched!']);
     }
 
     public function registerPage()
@@ -67,19 +67,20 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request, $id)
+    public function logout(Request $request)
     {
-        Auth::logout($id);
+        try {
+            Auth::logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with(['success' => 'Logged Out Successfully!']);
-    }
+            return redirect()->route('login')->with(['success' => 'Logged Out Successfully!']);
+        } catch (\Exception $e) {
+            Log::error('Something went wrong while logout : ' . $e->getMessage());
 
-    public function dashboard()
-    {
-        return view('backend.dashboard');
+            return back()->with(['error' => 'Something went wrong']);
+        }
     }
 }

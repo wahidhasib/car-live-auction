@@ -5,16 +5,17 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box about-us">
                         <a href="#" class="footer-logo">
-                            <img src="assets/img/logo/logo-light.png" alt="">
+                            <img src="{{ asset('frontend/img/logo/logo-light.png') }}" alt="">
                         </a>
                         <p class="mb-3">
-                            We are many variations of passages available but the majority have suffered alteration
-                            in some form by injected humour words believable.
+                            {{ $settings->footer_text }}
                         </p>
                         <ul class="footer-contact">
-                            <li><a href="tel:+21236547898"><i class="far fa-phone"></i>+2 123 654 7898</a></li>
-                            <li><i class="far fa-map-marker-alt"></i>25/B Milford Road, New York</li>
-                            <li><a href="mailto:info@example.com"><i class="far fa-envelope"></i>info@example.com</a>
+                            <li><a href="tel:{{ $settings->phone }}"><i
+                                        class="far fa-phone"></i>{{ $settings->phone }}</a></li>
+                            <li><i class="far fa-map-marker-alt"></i>{{ $settings->address }}</li>
+                            <li><a href="mailto:{{ $settings->email }}"><i
+                                        class="far fa-envelope"></i>{{ $settings->email }}</a>
                             </li>
                         </ul>
                     </div>
@@ -69,16 +70,29 @@
             <div class="row">
                 <div class="col-md-6 align-self-center">
                     <p class="copyright-text">
-                        &copy; Copyright <span id="date"></span> <a href="#"> MOTEX </a> All Rights
+                        &copy; Copyright <span id="date"></span> <a href="#"> {{ $settings->company_name }}
+                        </a> All Rights
                         Reserved.
                     </p>
                 </div>
                 <div class="col-md-6 align-self-center">
                     <ul class="footer-social">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                        @if ($settings->facebook)
+                            <li><a href="{{ $settings->facebook }}" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a></li>
+                        @endif
+                        @if ($settings->instagram)
+                            <li><a href="{{ $settings->instagram }}" target="_blank"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
+                        @endif
+                        @if ($settings->linkedin)
+                            <li><a href="{{ $settings->linkedin }}" target="_blank"><i
+                                        class="fab fa-linkedin-in"></i></a></li>
+                        @endif
+                        @if ($settings->youtube)
+                            <li><a href="{{ $settings->youtube }}" target="_blank"><i class="fab fa-youtube"></i></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

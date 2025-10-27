@@ -6,20 +6,21 @@
                 <div class="header-top-left">
                     <div class="header-top-contact">
                         <ul>
-                            <li><a href="mailto:info@example.com"><i class="far fa-envelopes"></i>
-                                    info@example.com</a></li>
-                            <li><a href="tel:+21236547898"><i class="far fa-phone-volume"></i> +2 123 654 7898</a>
+                            <li><a href="mailto:{{ $settings->email }}"><i class="far fa-envelopes"></i>
+                                    {{ $settings->email }}</a></li>
+                            <li><a href="tel:{{ $settings->phone }}"><i class="far fa-phone-volume"></i>
+                                    {{ $settings->phone }}</a>
                             </li>
-                            <li><a href="#"><i class="far fa-alarm-clock"></i> Sun - Fri (08AM - 10PM)</a></li>
+                            <li><a href="#"><i class="far fa-alarm-clock"></i> {{ $settings->working_time }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-top-right">
                     <div class="header-top-link">
                         @if (Auth::check())
-                            <form action="{{ route('logout', Auth::id()) }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                @method('DELETE')
                                 <button type="submit" class=" bg-transparent border-0 text-white"><i
                                         class="fa-solid fa-right-from-bracket"></i> Logout</button>
                             </form>
@@ -30,10 +31,19 @@
                     </div>
                     <div class="header-top-social">
                         <span>Follow Us: </span>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        @if ($settings->facebook)
+                            <a href="{{ $settings->facebook }}"><i class="fab fa-facebook"></i></a>
+                        @endif
+                        @if ($settings->instagram)
+                            <a href="{{ $settings->instagram }}" target="_blank"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                        @endif
+                        @if ($settings->instagram)
+                            <a href="{{ $settings->instagram }}"><i class="fab fa-instagram"></i></a>
+                        @endif
+                        @if ($settings->linkedin)
+                            <a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -43,7 +53,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container position-relative">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('frontend/img/logo/logo.png') }}" alt="logo">
+                    <img src="{{ asset('storage/' . $settings->header_logo) }}" alt="logo">
                 </a>
                 <div class="mobile-menu-right">
                     <div class="search-btn">
@@ -60,98 +70,16 @@
                                 class="nav-link {{ request()->routeIs('home') == 'home' ? 'active' : '' }}"
                                 href="{{ route('home') }}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Services</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Inventory</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Features</a>
                             <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="inventory-grid.html">Inventory Grid</a></li>
-                                <li><a class="dropdown-item" href="inventory-list.html">Inventory List</a></li>
-                                <li><a class="dropdown-item" href="inventory-single.html">Inventory Single</a></li>
+                                <li><a class="dropdown-item" href="inventory-grid.html">EMI Calculator</a></li>
+                                <li><a class="dropdown-item" href="inventory-list.html">Cutom Duty</a></li>
+                                <li><a class="dropdown-item" href="inventory-single.html">Auction Sheet</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
-                            <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Car Listing</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="listing-grid.html">Listing Grid</a></li>
-                                        <li><a class="dropdown-item" href="listing-list.html">Listing List</a></li>
-                                        <li><a class="dropdown-item" href="listing-single.html">Listing Single</a>
-                                        <li><a class="dropdown-item" href="compare.html">Compare</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">My Account</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                                        <li><a class="dropdown-item" href="profile-listing.html">My Listing</a></li>
-                                        <li><a class="dropdown-item" href="add-listing.html">Add Listing</a></li>
-                                        <li><a class="dropdown-item" href="profile-favorite.html">My Favorites</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="profile-message.html">Messages</a></li>
-                                        <li><a class="dropdown-item" href="profile-setting.html">Settings</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Authentication</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                        <li><a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Services</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="service.html">Services</a></li>
-                                        <li><a class="dropdown-item" href="service-single.html">Service Single</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Dealer</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="dealer.html">Dealer</a></li>
-                                        <li><a class="dropdown-item" href="dealer-single.html">Dealer Single</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Extra Pages</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="404.html">404 Error</a></li>
-                                        <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                                        <li><a class="dropdown-item" href="terms.html">Terms Of Service</a></li>
-                                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="team.html">Our Team</a></li>
-                                <li><a class="dropdown-item" href="pricing.html">Pricing Plan</a></li>
-                                <li><a class="dropdown-item" href="calculator.html">Calculator</a></li>
-                                <li><a class="dropdown-item" href="faq.html">Faq</a></li>
-                                <li><a class="dropdown-item" href="testimonial.html">Testimonials</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop</a>
-                            <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="shop.html">Shop</a></li>
-                                <li><a class="dropdown-item" href="shop-cart.html">Shop Cart</a></li>
-                                <li><a class="dropdown-item" href="shop-checkout.html">Shop Checkout</a></li>
-                                <li><a class="dropdown-item" href="shop-single.html">Shop Single</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Blog</a>
-                            <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                                <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Testimonials</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
                     <div class="nav-right">
@@ -159,8 +87,7 @@
                             <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
                         </div>
                         <div class="cart-btn">
-                            <a href="#" class="nav-right-link"><i
-                                    class="far fa-cart-plus"></i><span>0</span></a>
+                            <a href="#" class="nav-right-link"><i class="far fa-cart-plus"></i><span>0</span></a>
                         </div>
                         <div class="nav-right-btn mt-2">
                             <a href="#" class="theme-btn"><span class="far fa-plus-circle"></span>Add

@@ -33,10 +33,11 @@
                             </div>
                         @endif
                     </div>
-                    <form action="#">
+                    <form action="{{ route('login.action') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" value="{{ old('email') }}"
+                            <input type="email" name="email" value="{{ old('email') }}"
                                 class="form-control @error('email') is-invalid @enderror" required placeholder="Your Email">
                             @error('email')
                                 <div class="mt-1 text-danger">{{ $message }}</div>
@@ -44,7 +45,8 @@
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" required
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" required
                                 placeholder="Your Password">
                             @error('password')
                                 <div class="mt-1 text-danger">{{ $message }}</div>

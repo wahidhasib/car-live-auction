@@ -27,9 +27,8 @@
                     <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
                         center</a>
                     <div class="dropdown-divider"></div>
-                    <form action="{{ route('logout', Auth::id()) }}">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        @method('PUT')
                         <button type="submit" class="dropdown-item text-danger" href="#"><i
                                 class="material-icons md-exit_to_app"></i>Logout</button>
                     </form>

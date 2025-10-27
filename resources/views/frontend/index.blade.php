@@ -227,13 +227,13 @@
                 <div class="col-lg-6">
                     <div class="about-left wow fadeInLeft" data-wow-delay=".25s">
                         <div class="about-img">
-                            <img src="{{ asset('frontend/img/about/01.png') }}" alt="">
+                            <img src="{{ asset('storage/' . $settings->about_image) }}" alt="about img">
                         </div>
                         <div class="about-experience">
                             <div class="about-experience-icon">
                                 <i class="flaticon-car"></i>
                             </div>
-                            <b>30 Years Of <br> Quality Service</b>
+                            <b>30 Years Of Quality Service</b>
                         </div>
                     </div>
                 </div>
@@ -241,30 +241,17 @@
                     <div class="about-right wow fadeInRight" data-wow-delay=".25s">
                         <div class="site-heading mb-3">
                             <span class="site-title-tagline justify-content-start">
-                                <i class="flaticon-drive"></i> About Us
+                                <i class="flaticon-drive"></i> {{ $settings->about_subtitle }}
                             </span>
                             <h2 class="site-title">
-                                World Largest <span>Car Dealer</span> Marketplace.
+                                {{ Str::beforeLast($settings->about_title, ' ') }}
+                                <span>{{ Str::afterLast($settings->about_title, ' ') }}</span>
                             </h2>
                         </div>
                         <p class="about-text">
-                            There are many variations of passages of Lorem Ipsum available, but the majority have
-                            suffered alteration in some form, by injected humour.
+                            {{ $settings->about_text }}
                         </p>
-                        <div class="about-list-wrapper">
-                            <ul class="about-list list-unstyled">
-                                <li>
-                                    At vero eos et accusamus et iusto odio.
-                                </li>
-                                <li>
-                                    Established fact that a reader will be distracted.
-                                </li>
-                                <li>
-                                    Sed ut perspiciatis unde omnis iste natus sit.
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="about.html" class="theme-btn mt-4">Discover More<i
+                        <a href="{{ route('about') }}" class="theme-btn mt-4">{{ $settings->about_btn_text }}<i
                                 class="fas fa-arrow-right-long"></i></a>
                     </div>
                 </div>
@@ -284,7 +271,8 @@
                             <i class="flaticon-car-rental"></i>
                         </div>
                         <div>
-                            <span class="counter" data-count="+" data-to="500" data-speed="3000">500</span>
+                            <span class="counter" data-count="+" data-to="{{ $settings->count_cars }}"
+                                data-speed="3000">{{ $settings->count_cars }}</span>
                             <h6 class="title">+ Available Cars </h6>
                         </div>
                     </div>
@@ -295,7 +283,8 @@
                             <i class="flaticon-car-key"></i>
                         </div>
                         <div>
-                            <span class="counter" data-count="+" data-to="900" data-speed="3000">900</span>
+                            <span class="counter" data-count="+" data-to="{{ $settings->count_clients }}"
+                                data-speed="3000">{{ $settings->count_clients }}</span>
                             <h6 class="title">+ Happy Clients</h6>
                         </div>
                     </div>
@@ -306,7 +295,8 @@
                             <i class="flaticon-screwdriver"></i>
                         </div>
                         <div>
-                            <span class="counter" data-count="+" data-to="1500" data-speed="3000">1500</span>
+                            <span class="counter" data-count="+" data-to="{{ $settings->count_workers }}"
+                                data-speed="3000">{{ $settings->count_workers }}</span>
                             <h6 class="title">+ Team Workers</h6>
                         </div>
                     </div>
@@ -317,7 +307,8 @@
                             <i class="flaticon-review"></i>
                         </div>
                         <div>
-                            <span class="counter" data-count="+" data-to="30" data-speed="3000">30</span>
+                            <span class="counter" data-count="+" data-to="{{ $settings->count_experience }}"
+                                data-speed="3000">{{ $settings->count_experience }}</span>
                             <h6 class="title">+ Years Of Experience</h6>
                         </div>
                     </div>
@@ -334,8 +325,11 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i> New Arrivals</span>
-                        <h2 class="site-title">Let's Check Latest <span>Cars</span></h2>
+                        <span class="site-title-tagline"><i class="flaticon-drive"></i>
+                            {{ $settings->latest_car_subtitle }}</span>
+                        <h2 class="site-title">{{ Str::beforeLast($settings->latest_car_title, ' ') }}
+                            <span>{{ Str::afterLast($settings->latest_car_title, ' ') }}</span>
+                        </h2>
                         <div class="heading-divider"></div>
                     </div>
                 </div>
@@ -632,8 +626,11 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i> Car Category</span>
-                        <h2 class="site-title">Car By Body <span>Types</span></h2>
+                        <span class="site-title-tagline"><i class="flaticon-drive"></i>
+                            {{ $settings->category_subtitle }}</span>
+                        <h2 class="site-title">{{ Str::beforeLast($settings->category_title, ' ') }}
+                            <span>{{ Str::afterLast($settings->category_title, ' ') }}</span>
+                        </h2>
                         <div class="heading-divider"></div>
                     </div>
                 </div>
@@ -744,11 +741,12 @@
     <!-- video area -->
     <div class="video-area pb-120">
         <div class="container-fluid px-0">
-            <div class="video-content" style="background-image: url({{ asset('frontend/img/video/01.jpg') }});">
+            <div class="video-content"
+                style="background-image: url({{ asset('storage/' . $settings->banner_background) }});">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <div class="video-wrapper">
-                            <a class="play-btn popup-youtube" href="https://www.youtube.com/watch?v=ckHzmP1evNU">
+                            <a class="play-btn popup-youtube" href="{{ $settings->video_link }}">
                                 <i class="fas fa-play"></i>
                             </a>
                         </div>
@@ -759,154 +757,6 @@
     </div>
     <!-- video area end -->
 
-
-    <!-- car dealer -->
-    <div class="car-dealer pb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i> Car Dealers</span>
-                        <h2 class="site-title">Best Dealers In <span>Your City</span></h2>
-                        <div class="heading-divider"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">25 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/01.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Automotive Gear</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">35 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/02.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Keithson Car</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">15 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/03.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Superious Automotive</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">20 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/04.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Racing Gear Car</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">19 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/05.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Car Showromio</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">40 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/06.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Fastspeedio Car</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">59 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/07.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Star AutoMall</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="dealer-img">
-                            <span class="dealer-listing">28 Listing</span>
-                            <img src="{{ asset('frontend/img/dealer/08.png') }}" alt="">
-                        </div>
-                        <div class="dealer-content">
-                            <h4><a href="#">Superspeed Auto</a></h4>
-                            <ul>
-                                <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
-                                <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- car dealer end-->
-
-
     <!-- choose area -->
     <div class="choose-area py-120">
         <div class="container">
@@ -915,18 +765,18 @@
                     <div class="choose-content">
                         <div class="site-heading wow fadeInDown" data-wow-delay=".25s">
                             <span class="site-title-tagline text-white justify-content-start">
-                                <i class="flaticon-drive"></i> Why Choose Us
+                                <i class="flaticon-drive"></i> {{ $settings->service_subtitle }}
                             </span>
-                            <h2 class="site-title text-white mb-10">We are dedicated <span>to provide</span>
-                                quality service</h2>
+                            <h2 class="site-title text-white mb-10">
+                                {{ Str::beforeLast($settings->service_title, ' ') }}
+                                <span>{{ Str::afterLast($settings->service_title, ' ') }}</span>
+                            </h2>
                             <p class="text-white">
-                                There are many variations of passages available but the majority have suffered
-                                alteration in some form going to use a passage by injected humour randomised words
-                                which don't look even slightly believable.
+                                {{ $settings->service_text }}
                             </p>
                         </div>
                         <div class="choose-img wow fadeInUp" data-wow-delay=".25s">
-                            <img src="{{ asset('frontend/img/choose/01.png') }}" alt="">
+                            <img src="{{ asset('storage/' . $settings->service_image) }}" alt="service image">
                         </div>
                     </div>
                 </div>
@@ -940,9 +790,8 @@
                                         <i class="flaticon-car"></i>
                                     </div>
                                     <div class="choose-item-info">
-                                        <h3>Best Quality Cars</h3>
-                                        <p>There are many variations of the passages available but the majo have
-                                            suffered fact that reader will be dist alteration.</p>
+                                        <h3>{{ $settings->service_quality_title }}</h3>
+                                        <p>{{ $settings->service_quality_text }}</p>
                                     </div>
                                 </div>
                                 <div class="choose-item mb-lg-0">
@@ -951,9 +800,8 @@
                                         <i class="flaticon-drive-thru"></i>
                                     </div>
                                     <div class="choose-item-info">
-                                        <h3>Popular Brands</h3>
-                                        <p>There are many variations of the passages available but the majo have
-                                            suffered fact that reader will be dist alteration.</p>
+                                        <h3>{{ $settings->service_mechanic_title }}</h3>
+                                        <p>{{ $settings->service_mechanic_text }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -964,9 +812,8 @@
                                         <i class="flaticon-chauffeur"></i>
                                     </div>
                                     <div class="choose-item-info">
-                                        <h3>Certified Mechanics</h3>
-                                        <p>There are many variations of the passages available but the majo have
-                                            suffered fact that reader will be dist alteration.</p>
+                                        <h3>{{ $settings->service_brand_title }}</h3>
+                                        <p>{{ $settings->service_brand_text }}</p>
                                     </div>
                                 </div>
                                 <div class="choose-item mb-lg-0">
@@ -975,9 +822,8 @@
                                         <i class="flaticon-online-payment"></i>
                                     </div>
                                     <div class="choose-item-info">
-                                        <h3>Reasonable Price</h3>
-                                        <p>There are many variations of the passages available but the majo have
-                                            suffered fact that reader will be dist alteration.</p>
+                                        <h3>{{ $settings->service_price_title }}</h3>
+                                        <p>{{ $settings->service_price_text }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -996,8 +842,11 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i> Popular Brands</span>
-                        <h2 class="site-title">Our Top Quality <span>Brands</span></h2>
+                        <span class="site-title-tagline"><i class="flaticon-drive"></i>
+                            {{ $settings->brand_subtitle }}</span>
+                        <h2 class="site-title">{{ Str::beforeLast($settings->brand_title, ' ') }}
+                            <span>{{ Str::afterLast($settings->brand_title, ' ') }}</span>
+                        </h2>
                         <div class="heading-divider"></div>
                     </div>
                 </div>
@@ -1063,8 +912,11 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i> Testimonials</span>
-                        <h2 class="site-title">What Our Client <span>Say's</span></h2>
+                        <span class="site-title-tagline"><i class="flaticon-drive"></i>
+                            {{ $settings->testimonial_subtitle }}</span>
+                        <h2 class="site-title">{{ Str::beforeLast($settings->testimonial_title, ' ') }}
+                            <span>{{ Str::afterLast($settings->testimonial_title, ' ') }}</span>
+                        </h2>
                         <div class="heading-divider"></div>
                     </div>
                 </div>
@@ -1281,49 +1133,4 @@
         </div>
     </div>
     <!-- blog area end -->
-
-
-    <!-- download area -->
-    <div class="download-area mb-120">
-        <div class="container">
-            <div class="download-wrapper">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="download-content">
-                            <div class="site-heading mb-4">
-                                <span class="site-title-tagline justify-content-start">
-                                    <i class="flaticon-drive"></i> Get Our App
-                                </span>
-                                <h2 class="site-title mb-10">Download <span>Our Motex</span> App For Free</h2>
-                                <p>
-                                    There are many variations of passages available but the majority have suffered
-                                    in some form going to use a passage by injected humour.
-                                </p>
-                            </div>
-                            <div class="download-btn">
-                                <a href="#">
-                                    <i class="fab fa-google-play"></i>
-                                    <div class="download-btn-content">
-                                        <span>Get It On</span>
-                                        <strong>Google Play</strong>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <i class="fab fa-app-store"></i>
-                                    <div class="download-btn-content">
-                                        <span>Get It On</span>
-                                        <strong>App Store</strong>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="download-img">
-                    <img src="{{ asset('frontend/img/download/01.png') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- download area end -->
 @endsection

@@ -10,23 +10,17 @@
     </div>
     <nav>
         <ul class="menu-aside">
-            <li class="menu-item active">
-                <a class="menu-link" href="index.html">
+            <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <a class="menu-link" href="{{ route('admin.dashboard') }}">
                     <i class="icon material-icons md-home"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href="page-products-list.html">
+            <li class="menu-item {{ request()->routeIs('admin.carousel.index') ? 'active' : '' }}">
+                <a class="menu-link" href="{{ route('admin.carousel.index') }}">
                     <i class="icon material-icons md-shopping_bag"></i>
-                    <span class="text">Products</span>
+                    <span class="text">Carousels</span>
                 </a>
-                <div class="submenu">
-                    <a href="page-products-list.html">Product List</a>
-                    <a href="page-products-grid.html">Product grid</a>
-                    <a href="page-products-grid-2.html">Product grid 2</a>
-                    <a href="page-categories.html">Categories</a>
-                </div>
             </li>
             <li class="menu-item has-submenu">
                 <a class="menu-link" href="page-orders-1.html">
@@ -102,20 +96,10 @@
         </ul>
         <hr />
         <ul class="menu-aside">
-            <li class="menu-item has-submenu">
-                <a class="menu-link" href="#">
+            <li class="menu-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                <a class="menu-link" href="{{ route('admin.settings') }}">
                     <i class="icon material-icons md-settings"></i>
                     <span class="text">Settings</span>
-                </a>
-                <div class="submenu">
-                    <a href="page-settings-1.html">Setting sample 1</a>
-                    <a href="page-settings-2.html">Setting sample 2</a>
-                </div>
-            </li>
-            <li class="menu-item">
-                <a class="menu-link" href="page-blank.html">
-                    <i class="icon material-icons md-local_offer"></i>
-                    <span class="text"> Starter page </span>
                 </a>
             </li>
         </ul>

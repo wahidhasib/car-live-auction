@@ -13,7 +13,7 @@
     <title>Motex - @yield('title', 'Home')</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/img/logo/favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $settings->fav_icon) }}">
 
     <!-- css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
@@ -54,33 +54,42 @@
                     <img src="assets/img/logo/logo.png" alt="">
                 </div>
                 <div class="sidebar-about">
-                    <h4>About Us</h4>
-                    <p>There are many variations of passages available sure there majority have suffered alteration in
-                        some form by injected humour or randomised words which don't look even slightly believable.</p>
+                    <h4>{{ $settings->about_subtitle }}</h4>
+                    <p>{{ $settings->about_title }}</p>
                 </div>
                 <div class="sidebar-contact">
                     <h4>Contact Info</h4>
                     <ul>
                         <li>
                             <h6>Email</h6>
-                            <a href="mailto:info@example.com"><i class="far fa-envelope"></i>info@example.com</a>
+                            <a href="mailto:{{ $settings->email }}"><i
+                                    class="far fa-envelope"></i>{{ $settings->email }}</a>
                         </li>
                         <li>
                             <h6>Phone</h6>
-                            <a href="tel:+21236547898"><i class="far fa-phone"></i>+2 123 654 7898</a>
+                            <a href="tel:{{ $settings->phone }}"><i
+                                    class="far fa-phone"></i>{{ $settings->phone }}</a>
                         </li>
                         <li>
                             <h6>Address</h6>
-                            <a href="#"><i class="far fa-location-dot"></i>25/B Milford Road, New York</a>
+                            <a href="#"><i class="far fa-location-dot"></i>{{ $settings->address }}</a>
                         </li>
                     </ul>
                 </div>
                 <div class="sidebar-social">
                     <h4>Follow Us</h4>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    @if ($settings->facebook)
+                        <a href="{{ $settings->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    @endif
+                    @if ($settings->instagram)
+                        <a href="{{ $settings->instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    @endif
+                    @if ($settings->linkedin)
+                        <a href="{{ $settings->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    @endif
+                    @if ($settings->youtube)
+                        <a href="{{ $settings->youtube }}" target="_blank"><i class="fab fa-youtube"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
