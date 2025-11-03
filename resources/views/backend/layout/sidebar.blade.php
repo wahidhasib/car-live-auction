@@ -77,15 +77,15 @@
                     <a href="page-error-404.html">Error 404</a>
                 </div>
             </li>
-            <li class="menu-item">
-                <a class="menu-link" href="page-reviews.html">
+            <li class="menu-item {{ request()->routeIs('admin.testimonial.index') ? 'active' : '' }}">
+                <a class="menu-link" href="{{ route('admin.testimonial.index') }}">
                     <i class="icon material-icons md-comment"></i>
-                    <span class="text">Reviews</span>
+                    <span class="text">Testimonials</span>
                 </a>
             </li>
-            <li class="menu-item">
-                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i> <span
-                        class="text">Brands</span> </a>
+            <li class="menu-item {{ request()->routeIs('admin.brand.index') ? 'active' : '' }}">
+                <a class="menu-link" href="{{ route('admin.brand.index') }}"> <i
+                        class="icon material-icons md-stars"></i> <span class="text">Brands</span> </a>
             </li>
             <li class="menu-item">
                 <a class="menu-link" disabled href="#">

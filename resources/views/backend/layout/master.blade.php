@@ -12,7 +12,9 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('backend/imgs/theme/favicon.svg') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/' . $settings->favicon) }}" />
+    {{-- font awesome 7 --}}
+    <link rel="stylesheet" href="{{ asset('fontawesome7/css/all.min.css') }}">
     <!-- Template CSS -->
     <script src="{{ asset('backend/js/vendors/color-modes.js') }}"></script>
     <link href="{{ asset('backend/css/main.css') }}" rel="stylesheet" type="text/css" />
@@ -47,6 +49,8 @@
     <script src="{{ asset('backend/js/vendors/select2.min.js') }}"></script>
     <script src="{{ asset('backend/js/vendors/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('backend/js/vendors/jquery.fullscreen.min.js') }}"></script>
+    {{-- fontawesome js --}}
+    <script src="{{ asset('fontawesome7/js/all.min.js') }}"></script>
     <!-- Main Script -->
     <script src="{{ asset('backend/js/main.js') }}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

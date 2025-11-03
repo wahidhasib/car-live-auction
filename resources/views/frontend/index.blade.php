@@ -8,108 +8,77 @@
     <!-- hero slider -->
     <div class="hero-section">
         <div class="hero-slider owl-carousel owl-theme">
-            <div class="hero-single" style="background: url({{ asset('frontend/img/slider/slider-1.jpg') }})">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-content">
-                                <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Welcome To
-                                    Motex!
-                                </h6>
-                                <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                    Best Way To Find Your <span>Dream</span> Car
-                                </h1>
-                                <p data-animation="fadeInLeft" data-delay=".75s">
-                                    There are many variations of passages orem psum available but the majority have
-                                    suffered alteration in some form by injected humour.
-                                </p>
-                                <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                    <a href="#" class="theme-btn">About More<i
-                                            class="fas fa-arrow-right-long"></i></a>
-                                    <a href="#" class="theme-btn theme-btn2">Learn More<i
-                                            class="fas fa-arrow-right-long"></i></a>
+            @forelse ($carousels as $carousel)
+                <div class="hero-single" style="background: url({{ asset('storage/' . $carousel->carousel_background) }})">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-6">
+                                <div class="hero-content">
+                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">
+                                        {{ $carousel->carousel_title }}
+                                    </h6>
+                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        {{ Str::beforeLast($carousel->carousel_title, ' ') }}
+                                        <span>{{ Str::afterLast($carousel->carousel_title, ' ') }}</span>
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        {{ $carousel->carousel_text }}
+                                    </p>
+                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="{{ route('about') }}" class="theme-btn">About More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                        {{-- <a href="{{ route('about') }}" class="theme-btn theme-btn2">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a> --}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-right">
-                                <div class="hero-img">
-                                    <img src="{{ asset('frontend/img/slider/hero-1.png') }}" alt=""
-                                        data-animation="fadeInRight" data-delay=".25s">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-single" style="background: url({{ asset('frontend/img/slider/slider-2.jpg') }})">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-content">
-                                <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Welcome To
-                                    Motex!
-                                </h6>
-                                <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                    Best Way To Find Your <span>Dream</span> Car
-                                </h1>
-                                <p data-animation="fadeInLeft" data-delay=".75s">
-                                    There are many variations of passages orem psum available but the majority have
-                                    suffered alteration in some form by injected humour.
-                                </p>
-                                <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                    <a href="#" class="theme-btn">About More<i
-                                            class="fas fa-arrow-right-long"></i></a>
-                                    <a href="#" class="theme-btn theme-btn2">Learn More<i
-                                            class="fas fa-arrow-right-long"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-right">
-                                <div class="hero-img">
-                                    <img src="{{ asset('frontend/img/slider/hero-2.png') }}" alt=""
-                                        data-animation="fadeInRight" data-delay=".25s">
+                            <div class="col-md-12 col-lg-6">
+                                <div class="hero-right">
+                                    <div class="hero-img">
+                                        <img src="{{ asset('storage/' . $carousel->carousel_image) }}" alt=""
+                                            data-animation="fadeInRight" data-delay=".25s">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero-single" style="background: url({{ asset('frontend/img/slider/slider-3.jpg') }})">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-content">
-                                <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Welcome To
-                                    Motex!
-                                </h6>
-                                <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                    Best Way To Find Your <span>Dream</span> Car
-                                </h1>
-                                <p data-animation="fadeInLeft" data-delay=".75s">
-                                    There are many variations of passages orem psum available but the majority have
-                                    suffered alteration in some form by injected humour.
-                                </p>
-                                <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                    <a href="#" class="theme-btn">About More<i
-                                            class="fas fa-arrow-right-long"></i></a>
-                                    <a href="#" class="theme-btn theme-btn2">Learn More<i
-                                            class="fas fa-arrow-right-long"></i></a>
+            @empty
+                <div class="hero-single" style="background: url({{ asset('frontend/img/slider/slider-1.jpg') }})">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-6">
+                                <div class="hero-content">
+                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Welcome To
+                                        Motex!
+                                    </h6>
+                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Best Way To Find Your <span>Dream</span> Car
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        There are many variations of passages orem psum available but the majority have
+                                        suffered alteration in some form by injected humour.
+                                    </p>
+                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="#" class="theme-btn">About More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                        <a href="#" class="theme-btn theme-btn2">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="hero-right">
-                                <div class="hero-img">
-                                    <img src="{{ asset('frontend/img/slider/hero-4.png') }}" alt=""
-                                        data-animation="fadeInRight" data-delay=".25s">
+                            <div class="col-md-12 col-lg-6">
+                                <div class="hero-right">
+                                    <div class="hero-img">
+                                        <img src="{{ asset('frontend/img/slider/hero-1.png') }}" alt=""
+                                            data-animation="fadeInRight" data-delay=".25s">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforelse
         </div>
     </div>
     <!-- hero slider end -->
@@ -852,54 +821,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".25s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/01.png') }}" alt="">
-                        </div>
-                        <h5>Ferrari</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".50s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/02.png') }}" alt="">
-                        </div>
-                        <h5>Hyundai</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".75s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/03.png') }}" alt="">
-                        </div>
-                        <h5>Mercedes Benz</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/04.png') }}" alt="">
-                        </div>
-                        <h5>Toyota</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1.25s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/05.png') }}" alt="">
-                        </div>
-                        <h5>BMW</h5>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2">
-                    <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1.50s">
-                        <div class="brand-img">
-                            <img src="{{ asset('frontend/img/brand/06.png') }}" alt="">
-                        </div>
-                        <h5>Nissan</h5>
-                    </a>
-                </div>
+                @forelse ($brands as $brand)
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="brand-img">
+                                <img src="{{ asset('storage/' . $brand->brand_logo) }}" alt="">
+                            </div>
+                            <h5>{{ $brand->brand_title }}</h5>
+                        </a>
+                    </div>
+                @empty
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="brand-img">
+                                <img src="{{ asset('frontend/img/brand/01.png') }}" alt="">
+                            </div>
+                            <h5>Ferrari</h5>
+                        </a>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -929,106 +869,6 @@
                         </div>
                         <div class="testimonial-author-info">
                             <h4>Sylvia H Green</h4>
-                            <p>Customer</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote">
-                        <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                        <p>
-                            There are many variations of passages available but the majority have suffered to the
-                            alteration in some injected.
-                        </p>
-                    </div>
-                    <div class="testimonial-rate">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-single">
-                    <div class="testimonial-content">
-                        <div class="testimonial-author-img">
-                            <img src="{{ asset('frontend/img/testimonial/02.jpg') }}" alt="">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Gordo Novak</h4>
-                            <p>Customer</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote">
-                        <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                        <p>
-                            There are many variations of passages available but the majority have suffered to the
-                            alteration in some injected.
-                        </p>
-                    </div>
-                    <div class="testimonial-rate">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-single">
-                    <div class="testimonial-content">
-                        <div class="testimonial-author-img">
-                            <img src="{{ asset('frontend/img/testimonial/03.jpg') }}" alt="">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Reid E Butt</h4>
-                            <p>Customer</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote">
-                        <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                        <p>
-                            There are many variations of passages available but the majority have suffered to the
-                            alteration in some injected.
-                        </p>
-                    </div>
-                    <div class="testimonial-rate">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-single">
-                    <div class="testimonial-content">
-                        <div class="testimonial-author-img">
-                            <img src="{{ asset('frontend/img/testimonial/04.jpg') }}" alt="">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Parker Jimenez</h4>
-                            <p>Customer</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-quote">
-                        <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                        <p>
-                            There are many variations of passages available but the majority have suffered to the
-                            alteration in some injected.
-                        </p>
-                    </div>
-                    <div class="testimonial-rate">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-single">
-                    <div class="testimonial-content">
-                        <div class="testimonial-author-img">
-                            <img src="{{ asset('frontend/img/testimonial/05.jpg') }}" alt="">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Heruli Nez</h4>
                             <p>Customer</p>
                         </div>
                     </div>

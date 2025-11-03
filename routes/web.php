@@ -6,6 +6,8 @@ use App\Http\Controllers\Frontend\FrontendPageController;
 use App\Http\Controllers\Backend\BackendPageController;
 use App\Http\Controllers\backend\CarouselController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\backend\BrandController;
+use App\Http\Controllers\backend\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +48,9 @@ Route::prefix('admin')->as('admin.')->middleware('rolemanager:admin')->group(fun
 
         // carousel controller
         Route::resource('/carousel', CarouselController::class);
+        // Brand controller
+        Route::resource('/brand', BrandController::class);
+        // Testimonial controller
+        Route::resource('/testimonial', TestimonialController::class);
     });
 });
