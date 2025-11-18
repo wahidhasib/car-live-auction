@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('footer_logo')->nullable();
             $table->string('common_bg')->nullable();
             $table->string('fav_icon')->nullable();
+            $table->string('color_scheme')->nullable();
 
             $table->string('f_newsletter_text');
             $table->string('facebook')->nullable();

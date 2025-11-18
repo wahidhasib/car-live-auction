@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('cars', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->foreignId('brand_id')->references('id')->on('brands')->cascadeOnDelete();
+            $table->integer('rating');
+            $table->longText('description');
+            $table->decimal('price');
+            $table->foreignId('body_type')->references('id')->on('categories')->cascadeOnDelete();
+            $table->integer('condition');
+            $table->string('milage');
+            $table->string('transmission');
+            $table->string('year');
+            $table->string('fuel_type');
+            $table->string('color');
+            $table->integer('doors');
+            $table->integer('cylenders');
+            $table->integer('engine');
+            $table->string('vin_number')->unique();
+
+            // SEO
+            $table->string('meta_title');
+            $table->string('meta_description');
+            $table->string('meta_keywords');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('cars');
+    }
+};

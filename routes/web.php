@@ -1,13 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Frontend\FrontendPageController;
-use App\Http\Controllers\Backend\BackendPageController;
+use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\frontend\FrontendPageController;
+use App\Http\Controllers\backend\BackendPageController;
+use App\Http\Controllers\backend\BlogController;
 use App\Http\Controllers\backend\CarouselController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\backend\BrandController;
+use App\Http\Controllers\backend\CarController;
+use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TestimonialController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +24,10 @@ use App\Http\Controllers\backend\TestimonialController;
 Route::controller(FrontendPageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
     Route::get('/about', 'aboutPage')->name('about');
+    Route::get('/services', 'servicesPage')->name('services');
+    Route::get('/services/{slug}', 'serviceDetails')->name('service.details');
+    Route::get('/testimonials', 'testimonialsPage')->name('testimonials');
+    Route::get('/contact', 'contactPage')->name('contact');
 });
 
 /*
@@ -52,5 +61,22 @@ Route::prefix('admin')->as('admin.')->middleware('rolemanager:admin')->group(fun
         Route::resource('/brand', BrandController::class);
         // Testimonial controller
         Route::resource('/testimonial', TestimonialController::class);
+        // Category Controller
+        Route::resource('/category', CategoryController::class);
+        // Blog Controller
+        Route::resource('/blog', BlogController::class);
+        // Service controller
+        Route::resource('/service', ServiceController::class);
+        // Cars controller
+        Route::resource('/car', CarController::class);
     });
+});
+
+Route::get('/optimize', function () {
+    Artisan::call('config:cache');
+    Artisan::call('route:cache');
+    Artisan::call('view:cache');
+    Artisan::call('optimize');
+    Artisan::call('storage:link');
+    return "Configaration successfully!";
 });

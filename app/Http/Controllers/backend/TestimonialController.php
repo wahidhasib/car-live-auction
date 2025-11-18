@@ -128,6 +128,8 @@ class TestimonialController extends Controller
             }
 
             $testimonial->delete();
+            Cache::forget('testimonials');
+
             return redirect()->back()->with(['success' => 'Review deleted successfully!']);
         } catch (\Exception $e) {
             Log::error('Something went wrong while delete review: ' . $e->getMessage());

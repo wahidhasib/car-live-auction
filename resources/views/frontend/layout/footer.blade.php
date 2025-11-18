@@ -5,7 +5,8 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box about-us">
                         <a href="#" class="footer-logo">
-                            <img src="{{ asset('frontend/img/logo/logo-light.png') }}" alt="">
+                            <img src="{{ asset('storage/' . $settings->footer_logo) }}"
+                                alt="{{ $settings->company_name }}" title="{{ $settings->company_name }}" loading="lazy">
                         </a>
                         <p class="mb-3">
                             {{ $settings->footer_text }}
@@ -70,7 +71,8 @@
             <div class="row">
                 <div class="col-md-6 align-self-center">
                     <p class="copyright-text">
-                        &copy; Copyright <span id="date"></span> <a href="#"> {{ $settings->company_name }}
+                        &copy; Copyright <span id="date"></span> <a href="https://wahidhasib.com/" target="_blank">
+                            Wahid Hasib
                         </a> All Rights
                         Reserved.
                     </p>

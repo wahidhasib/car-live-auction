@@ -77,7 +77,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-6 mt-2">
-                        <label for="instagram" class="form-label">instagram link</label>
+                        <label for="instagram" class="form-label">Instagram link</label>
                         <input type="text" name="instagram" value="{{ $settings->instagram }}"
                             class="form-control @error('instagram') is-invalid @enderror" id="instagram">
                         @error('instagram')
@@ -85,7 +85,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-6 mt-2">
-                        <label for="youtube" class="form-label">youtube link</label>
+                        <label for="youtube" class="form-label">Youtube link</label>
                         <input type="text" name="youtube" value="{{ $settings->youtube }}"
                             class="form-control @error('youtube') is-invalid @enderror" id="youtube">
                         @error('youtube')
@@ -93,7 +93,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-6 mt-2">
-                        <label for="linkedin" class="form-label">linkedin link</label>
+                        <label for="linkedin" class="form-label">Linkedin link</label>
                         <input type="text" name="linkedin" value="{{ $settings->linkedin }}"
                             class="form-control @error('linkedin') is-invalid @enderror" id="linkedin">
                         @error('linkedin')
@@ -137,6 +137,15 @@
                         <input type="file" name="common_bg"
                             class="form-control @error('common_bg') is-invalid @enderror" id="common_bg">
                         @error('common_bg')
+                            <div class="mt-1 text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-6 mt-2">
+                        <label for="color_scheme" class="form-label">Color scheme or HEX code</label>
+                        <input type="text" placeholder="#0BA6DF" name="color_scheme"
+                            value="{{ $settings->color_scheme }}"
+                            class="form-control @error('color_scheme') is-invalid @enderror" id="color_scheme">
+                        @error('color_scheme')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
                     </div>

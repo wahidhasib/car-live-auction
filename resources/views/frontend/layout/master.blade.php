@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
+
+    <style>
+        :root {
+            --theme-color: {{ $settings->color_scheme ?? '#0BA6DF' }};
+        }
+    </style>
 
 </head>
 

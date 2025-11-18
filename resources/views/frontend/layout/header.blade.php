@@ -66,11 +66,12 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main_nav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a
-                                class="nav-link {{ request()->routeIs('home') == 'home' ? 'active' : '' }}"
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                                 href="{{ route('home') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
+                                href="{{ route('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
+                                href="{{ route('services') }}">Services</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Features</a>
                             <ul class="dropdown-menu fade-down">
@@ -79,19 +80,19 @@
                                 <li><a class="dropdown-item" href="inventory-single.html">Auction Sheet</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Testimonials</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link {{ request()->routeIs('testimonials') ? 'active' : '' }}"
+                                href="{{ route('testimonials') }}">Testimonials</a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}"><a class="nav-link"
+                                href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                     <div class="nav-right">
                         <div class="search-btn">
                             <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
                         </div>
                         <div class="cart-btn">
-                            <a href="#" class="nav-right-link"><i class="far fa-cart-plus"></i><span>0</span></a>
-                        </div>
-                        <div class="nav-right-btn mt-2">
-                            <a href="#" class="theme-btn"><span class="far fa-plus-circle"></span>Add
-                                Listing</a>
+                            <a href="#" class="nav-right-link"><i class="far fa-heart"></i><span>0</span></a>
                         </div>
                         <div class="sidebar-btn">
                             <button type="button" class="nav-right-link"><i class="far fa-bars-sort"></i></button>

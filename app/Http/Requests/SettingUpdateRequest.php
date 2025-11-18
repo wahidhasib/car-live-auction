@@ -29,11 +29,12 @@ class SettingUpdateRequest extends FormRequest
             'working_time' => 'required|string|max:255',
             'footer_text' => 'required|string',
             'address' => 'required|string|max:255',
-            'map_link' => 'required|url',
+            'map_link' => 'required|string',
             'header_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
             'footer_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
             'common_bg' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
             'fav_icon' => 'nullable|image|mimes:jpg,jpeg,png,ico|max:1024',
+            'color_scheme' => 'required|string',
 
             // Footer + Socials
             'f_newsletter_text' => 'required|string|max:255',

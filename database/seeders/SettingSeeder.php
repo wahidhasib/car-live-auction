@@ -14,24 +14,27 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'company_name' => 'Car Auction BD',
-            'email' => 'info@carauctionbd.com',
-            'phone' => '+8801712345678',
-            'working_time' => 'Mon - Sat: 9:00 AM - 8:00 PM',
-            'footer_text' => '© 2025 Car Auction BD. All rights reserved.',
-            'address' => 'House 12, Road 5, Banani, Dhaka, Bangladesh',
-            'map_link' => 'https://goo.gl/maps/xyz12345',
+            'company_name' => 'Car Live Auction',
+            'email' => 'carliveauction@gmail.com',
+            'phone' => '+8801979479720',
+            'working_time' => 'Sat - Thu: 9:00 AM - 8:00 PM',
+            'address' => '367,East Chowdhury Para,Rampura,DIT Road,Dhaka., Dhaka, Bangladesh',
+
+            'map_link' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29216.091936364286!2d89.65980159999998!3d23.746969599999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c5461f8a8aa7%3A0xa2034451ab7c79a4!2sCar%20Live%20Auction!5e0!3m2!1sen!2sbd!4v1762759289955!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+
             'header_logo' => 'uploads/settings/logo.png',
             'footer_logo' => 'uploads/settings/logo.png',
             'common_bg' => 'uploads/settings/common-bg.jpg',
             'fav_icon' => 'uploads/settings/favicon.ico',
+            'footer_text' => 'Footer description about the compnay',
+            'color_scheme' => '#0BA6DF',
 
             // Footer + Socials
             'f_newsletter_text' => 'Subscribe to our newsletter for the latest car updates.',
-            'facebook' => 'https://facebook.com/carauctionbd',
-            'instagram' => 'https://instagram.com/carauctionbd',
-            'youtube' => 'https://youtube.com/@carauctionbd',
-            'linkedin' => 'https://linkedin.com/company/carauctionbd',
+            'facebook' => 'https://www.facebook.com/carliveauction',
+            'instagram' => 'https://www.facebook.com/carliveauction',
+            'youtube' => 'https://www.facebook.com/carliveauction',
+            'linkedin' => 'https://www.facebook.com/carliveauction',
 
             // SEO
             'meta_title' => 'Car Auction BD - Buy and Sell Cars Online',
@@ -62,7 +65,7 @@ class SettingSeeder extends Seeder
 
             // Banner Section
             'banner_background' => 'uploads/settings/banner-bg.jpg',
-            'video_link' => 'https://www.youtube.com/watch?v=abcd1234',
+            'video_link' => 'https://youtu.be/3X_bQcmWw9w?si=u089GAU-7pO21AR-',
 
             // Service Section
             'service_subtitle' => 'Our Services',

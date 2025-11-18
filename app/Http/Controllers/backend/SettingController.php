@@ -26,6 +26,27 @@ class SettingController extends Controller
                 }
             }
 
+            $videoUrl = $data['video_link'];
+
+            if (preg_match('/youtu\.be\/([^\?]+)/', $videoUrl, $matches)) {
+                $videoId = $matches[1];
+            } elseif (preg_match('/v=([^&]+)/', $videoUrl, $matches)) {
+                $videoId = $matches[1];
+            } else {
+                $videoId = null;
+            }
+
+            $embedUrl = $videoId ? "https://www.youtube.com/watch?v={$videoId}" : $videoUrl;
+
+            $data['video_link'] = $embedUrl;
+
+
+            if (isset($data['color_scheme'])) {
+                $cleanColor = str_replace('#', '', $data['color_scheme']);
+
+                $data['color_scheme'] = '#' . trim($cleanColor);
+            }
+
             $setting->update($data);
 
             return redirect()->back()->with(['success' => 'Settings updated successfully!']);
