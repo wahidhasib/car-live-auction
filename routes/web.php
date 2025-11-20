@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\CarController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TestimonialController;
+use App\Http\Controllers\frontend\ReviewController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -23,11 +24,13 @@ use Illuminate\Support\Facades\Artisan;
 // 🏠 Frontend Routes
 Route::controller(FrontendPageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+    Route::get('/cars/{slug}', 'carDetails')->name('car.details');
     Route::get('/about', 'aboutPage')->name('about');
     Route::get('/services', 'servicesPage')->name('services');
     Route::get('/services/{slug}', 'serviceDetails')->name('service.details');
     Route::get('/testimonials', 'testimonialsPage')->name('testimonials');
     Route::get('/contact', 'contactPage')->name('contact');
+    Route::resource('reviews', ReviewController::class);
 });
 
 /*

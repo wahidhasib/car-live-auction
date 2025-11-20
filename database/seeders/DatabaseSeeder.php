@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
+            UserSeeder::class,
             SettingSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
@@ -25,13 +26,9 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             BlogSeeder::class,
             CarouselSeeder::class,
-        ]);
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => '12345678',
-            'role' => 'admin'
+            CarSeeder::class,
+            CarImagesSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

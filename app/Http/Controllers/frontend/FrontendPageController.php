@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Service;
@@ -39,9 +40,24 @@ class FrontendPageController extends Controller
             return Blog::latest()->limit(3)->get();
         });
 
-        // return Setting::firstOrFail();
+        $data['cars'] = Cache::remember('cars', 1800, function () {
+            return Car::with(['brand:id,brand_title', 'category:id,category_slug,category_name', 'images:id,car_id,image_path'])
+                ->latest()
+                ->limit(8)
+                ->get();
+        });
 
         return view('frontend.index', $data);
+    }
+
+    public function carDetails(string $slug)
+    {
+        $car = Car::with(['reviews', 'images:id,car_id,image_path'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+        // return $car;
+
+        return view('frontend.car-details', compact('car'));
     }
 
     public function aboutPage()

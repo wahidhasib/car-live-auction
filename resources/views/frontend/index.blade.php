@@ -307,41 +307,59 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="car-item wow fadeInUp" data-wow-delay=".25s">
-                        <div class="car-img">
-                            <span class="car-status status-1">Used</span>
-                            <img src="{{ asset('frontend/img/car/01.jpg') }}" alt="">
-                            <div class="car-btns">
-                                <a href="#"><i class="far fa-heart"></i></a>
-                                <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                            </div>
-                        </div>
-                        <div class="car-content">
-                            <div class="car-top">
-                                <h4><a href="#">Mercedes Benz Car</a></h4>
-                                <div class="car-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span>5.0 (58.5k Review)</span>
+                @if ($cars->count() > 0)
+                    @php
+                        $conditions = [
+                            1 => ['label' => 'Brand New', 'class' => '1'],
+                            2 => ['label' => 'Pre-owned', 'class' => '2'],
+                            3 => ['label' => 'Used', 'class' => '3'],
+                        ];
+                    @endphp
+                    @foreach ($cars as $car)
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="car-item wow fadeInUp" data-wow-delay=".25s">
+                                <div class="car-img">
+                                    <span
+                                        class="car-status status-{{ $conditions[$car->condition]['class'] }}">{{ $conditions[$car->condition]['label'] }}</span>
+                                    @php
+                                        $imagePath = $car->images->first()->image_path ?? null;
+                                    @endphp
+                                    @if ($imagePath && file_exists(public_path('storage/' . $imagePath)))
+                                        <img src="{{ asset('storage/' . $imagePath) }}" alt="{{ $car->name }}">
+                                    @else
+                                        <img src="{{ asset('frontend/img/car/01.jpg') }}" alt="">
+                                    @endif
+                                    <div class="car-btns">
+                                        <a href="#"><i class="far fa-heart"></i></a>
+                                        <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="car-content">
+                                    <div class="car-top">
+                                        <h4><a href="#">Mercedes Benz Car</a></h4>
+                                        <div class="car-rate">
+                                            @for ($i = 0; $i < $car->rating; $i++)
+                                                <i class="fas fa-star"></i>
+                                            @endfor
+                                            <span>({{ $car->rating }})</span>
+                                        </div>
+                                    </div>
+                                    <ul class="car-list">
+                                        <li><i class="far fa-steering-wheel"></i>{{ $car->transmission }}</li>
+                                        <li><i class="far fa-road"></i>{{ $car->milage }}</li>
+                                        <li><i class="far fa-car"></i>Model: {{ $car->year }}</li>
+                                        <li><i class="far fa-gas-pump"></i>{{ $car->category->category_name }}</li>
+                                    </ul>
+                                    <div class="car-footer">
+                                        <span class="car-price">৳ {{ $car->price }}</span>
+                                        <a href="{{ route('car.details', $car->slug) }}" class="theme-btn"><span
+                                                class="far fa-eye"></span>Details</a>
+                                    </div>
                                 </div>
                             </div>
-                            <ul class="car-list">
-                                <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                <li><i class="far fa-car"></i>Model: 2023</li>
-                                <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                            </ul>
-                            <div class="car-footer">
-                                <span class="car-price">$45,620</span>
-                                <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                            </div>
                         </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
             <div class="text-center mt-4">
                 <a href="#" class="theme-btn">Load More <i class="far fa-arrow-rotate-right"></i> </a>

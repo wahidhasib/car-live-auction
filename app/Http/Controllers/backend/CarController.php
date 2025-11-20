@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -53,6 +54,7 @@ class CarController extends Controller
             $data['slug'] = Str::slug($data['name']);
 
             $car = Car::create($data);
+            Cache::forget('cars');
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
@@ -116,6 +118,8 @@ class CarController extends Controller
             // handle new image exist
             $car->update($data);
 
+            Cache::forget('cars');
+
             if ($request->hasFile('images')) {
                 // Delete old imgaes
                 foreach ($car->images as $img) {
@@ -168,6 +172,8 @@ class CarController extends Controller
             }
 
             $car->delete();
+            Cache::forget('cars');
+
             return redirect()->route('admin.car.index')->with('success', 'Car deleted successfully!');
         } catch (\Exception $e) {
             Log::error('Somethign went wrong while delete car: ' . $e->getMessage());

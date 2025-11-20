@@ -49,11 +49,21 @@
                                         </td>
                                         <td>{{ $car->color }}</td>
                                         <td>{{ $car->engine }}</td>
-                                        <td><img src="{{ asset('storage/' . $car->images[0]->image_path) }}" alt="img"
-                                                height="40px" width="40px"></td>
                                         <td>
-                                            <a href="{{ route('admin.car.edit', $car->id) }}" class="btn btn-info btn-sm"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                            @php
+                                                $imagePath = $car->images->first()->image_path ?? null;
+                                            @endphp
+                                            @if ($imagePath && file_exists(public_path('storage/' . $imagePath)))
+                                                <img src="{{ asset('storage/' . $imagePath) }}" alt="{{ $car->name }}"
+                                                    height="40px" width="40px">
+                                            @else
+                                                <img src="{{ asset('frontend/img/car/01.jpg') }}" alt=""
+                                                    height="40px" width="40px">
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.car.edit', $car->id) }}"
+                                                class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <button class="btn btn-danger btn-sm deleteBtn"
                                                 data-id="{{ $car->id }}"><i class="fa-solid fa-trash"></i></button>
                                         </td>

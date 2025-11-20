@@ -24,8 +24,10 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/flex-slider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
+    @stack('css')
 
     <style>
         :root {
@@ -138,6 +140,13 @@
     <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
+
+    <!-- FlexSlider Plugin (missing in your setup, REQUIRED) -->
+    <script src="{{ asset('frontend/js/jquery.flexslider-min.js') }}"></script>
+
+    <!-- Your custom Flex Slider init -->
+    <script src="{{ asset('frontend/js/flex-slider.js') }}"></script>
+
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

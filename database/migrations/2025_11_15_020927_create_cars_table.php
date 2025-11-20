@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->foreignId('brand_id')->references('id')->on('brands')->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->integer('rating');
             $table->longText('description');
             $table->decimal('price');
