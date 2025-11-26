@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -28,8 +30,33 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-        // $validated = $request
+        if (!Auth::check()) {
+            return redirect()->back()->with('error', 'Please login first');
+        }
+
+        // Validate request
+        $validated = $request->validate([
+            'car_id' => 'required|exists:cars,id',
+            'comment' => 'nullable|string',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        // Check if user already reviewed this car
+        $existingReview = Review::where('car_id', $validated['car_id'])
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if ($existingReview) {
+            return redirect()->back()->with('error', 'You have already reviewed this car.');
+        }
+
+        // Add user_id to validated data
+        $validated['user_id'] = Auth::id();
+
+        // Create review
+        Review::create($validated);
+
+        return redirect()->back()->with('success', 'Review added successfully');
     }
 
     /**

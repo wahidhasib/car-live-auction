@@ -12,7 +12,10 @@ use App\Http\Controllers\backend\CarController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TestimonialController;
+use App\Http\Controllers\frontend\CompareController;
 use App\Http\Controllers\frontend\ReviewController;
+use App\Http\Controllers\frontend\SearchController;
+use App\Http\Controllers\frontend\WishListController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -24,13 +27,37 @@ use Illuminate\Support\Facades\Artisan;
 // 🏠 Frontend Routes
 Route::controller(FrontendPageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+    Route::get('/load-cars', 'loadCars')->name('loadCars');
     Route::get('/cars/{slug}', 'carDetails')->name('car.details');
     Route::get('/about', 'aboutPage')->name('about');
     Route::get('/services', 'servicesPage')->name('services');
     Route::get('/services/{slug}', 'serviceDetails')->name('service.details');
     Route::get('/testimonials', 'testimonialsPage')->name('testimonials');
     Route::get('/contact', 'contactPage')->name('contact');
+    Route::get('/emi-calculator', 'calculatorPage')->name('calculator');
+    Route::post('/calculate-emi', 'calculateEMI')->name('calculate');
+    Route::get('/comming-soon', 'commingSoonPage')->name('commingsoon');
     Route::resource('reviews', ReviewController::class);
+
+    // Search controller
+    Route::controller(SearchController::class)->name('search.')->group(function () {
+        Route::get('/search-ajax', 'headerSearch')->name('ajax');
+        Route::get('/search-cars', 'filterCars')->name('filter');
+    });
+
+    // Compare controller 
+    Route::controller(CompareController::class)->prefix('compare')->name('compare.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/add', 'addToCompare')->name('add');
+        Route::post('/remove', 'removeFromCompare')->name('remove');
+        Route::get('/count', 'countCompareItems')->name('count');
+    });
+});
+
+Route::controller(WishListController::class)->group(function () {
+    Route::get('/wishlist', 'wishListData')->name('wishlist.index');
+    Route::post('/wishlist/store', 'storeWishListRecord')->name('wishlist.store');
+    Route::get('/wishlist/remove', 'removeItem')->name('wishlist.remove');
 });
 
 /*

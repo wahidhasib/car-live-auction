@@ -59,6 +59,10 @@
                     <div class="search-btn">
                         <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
                     </div>
+                    <div class="wishlist-btn">
+                        <button type="button" id="mobile-wishlist-btn" class="nav-right-link"><i
+                                class="far fa-heart"></i><span class="count-item">0</span></button>
+                    </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span>
@@ -75,9 +79,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Features</a>
                             <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="inventory-grid.html">EMI Calculator</a></li>
-                                <li><a class="dropdown-item" href="inventory-list.html">Cutom Duty</a></li>
-                                <li><a class="dropdown-item" href="inventory-single.html">Auction Sheet</a></li>
+                                <li><a class="dropdown-item" href="{{ route('calculator') }}">EMI Calculator</a></li>
+                                <li><a class="dropdown-item" href="{{ route('commingsoon') }}">Cutom Duty</a></li>
+                                <li><a class="dropdown-item" href="{{ route('commingsoon') }}">Auction Sheet</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a
@@ -91,8 +95,12 @@
                         <div class="search-btn">
                             <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
                         </div>
-                        <div class="cart-btn">
-                            <a href="#" class="nav-right-link"><i class="far fa-heart"></i><span>0</span></a>
+                        <div class="cart-btn wishlist-btn">
+                            <a class="nav-right-link"><i class="far fa-heart"></i><span class="count-item">0</span></a>
+                        </div>
+                        <div class="cart-btn compare-btn p-0">
+                            <a href="{{ route('compare.index') }}" class="nav-right-link"><i
+                                    class="far fa-arrows-repeat"></i><span class="count-compare">0</span></a>
                         </div>
                         <div class="sidebar-btn">
                             <button type="button" class="nav-right-link"><i class="far fa-bars-sort"></i></button>
@@ -101,14 +109,65 @@
                 </div>
                 <!-- search area -->
                 <div class="search-area">
-                    <form action="#">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Type Keyword...">
-                            <button type="submit" class="search-icon-btn"><i class="far fa-search"></i></button>
+                    <div class="form-group p-0 position-relative" id="search-container">
+                        <input type="text" class="form-control search-input" id="search-input"
+                            name="search_input" placeholder="Type Keyword...">
+
+                        <!-- Search results box -->
+                        <div id="search-result-box" class="list-group position-absolute w-100 shadow-sm d-none"
+                            style="max-height: 250px; overflow-y: auto; z-index: 1000;">
+
+                            <!-- Example items -->
+                            {{-- <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/40" class="rounded me-3" width="40"
+                                        height="40">
+                                    <div>
+                                        <h6 class="mb-0">Product Name</h6>
+                                        <small class="text-muted">Short description here...</small>
+                                    </div>
+                                </div>
+                            </a> --}}
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- search area end -->
+
+                {{-- Wishlist container start --}}
+
+                <div class="wish-list-container my-3">
+                    <ul class="list-group wishlist-parent">
+                        <li class="list-group-item d-flex align-items-center p-2 shadow-sm rounded-3">
+
+                            <!-- Car Image -->
+                            <div class="car-image me-1">
+                                <a href="">
+                                    <img src="{{ asset('frontend/img/car/01.jpg') }}" alt="Car Image"
+                                        class="img-fluid rounded">
+                                </a>
+                            </div>
+
+                            <!-- Car Info (Minimal) -->
+                            <div class="car-info flex-grow-1">
+                                <a href="#">
+                                    <h6 class="fw-bold mb-1">Toyota Supra</h6>
+                                </a>
+
+                                <p class="mb-1 small">
+                                    Toyota | Sports
+                                </p>
+                            </div>
+
+                            <!-- Remove Button -->
+                            <button class="ms-2 rounded-circle border-0 bg-transparent remove-wishlist">
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+
+                {{-- Wishlist container start --}}
             </div>
         </nav>
     </div>

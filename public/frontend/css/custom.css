@@ -1,11 +1,82 @@
+/* Header section (Wish list container) */
+
+.wish-list-container {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 340px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease;
+    z-index: 90;
+}
+
+.wish-list-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wish-list-container img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}
+
+.wishlist-btn a,
+.compare-btn a {
+    cursor: pointer;
+}
+
+#mobile-wishlist-btn {
+    position: relative;
+}
+
+#mobile-wishlist-btn span {
+    position: absolute;
+    font-size: 14px;
+    top: 0;
+    right: 0;
+    background-color: #0d6efd;
+    color: #fff;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 4px;
+}
+
 .service-info img {
     height: 200px;
     width: 100%;
     object-fit: cover;
 }
 
+@media screen and (max-width: 992px) {
+    .wish-list-container {
+        top: 40px;
+        width: 300px;
+    }
+    .wish-list-container img {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .wish-list-container {
+        width: 280px;
+        right: 5px;
+        top: 35px;
+    }
+}
+
 .status-3 {
     background-color: brown !important;
+}
+
+.add-to-wishlist {
+    cursor: pointer !important;
 }
 
 
@@ -51,4 +122,10 @@
 
 .rating-stars input:checked~label {
     color: #ffb400;
+}
+
+.car-list-item .primary-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }

@@ -90,94 +90,63 @@
         <div class="container">
             <div class="find-car-form">
                 <h4 class="find-car-title">Let's Find Your Perfect Car</h4>
-                <form action="#">
+                <form action="{{ route('search.filter') }}" method="GET">
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Car Condition</label>
-                                <select class="select">
-                                    <option value="1">All Status</option>
-                                    <option value="2">New Car</option>
+                                <select class="select @error('condition') is-invalid @enderror" name="condition">
+                                    <option value="">All Status</option>
+                                    <option value="1">New Car</option>
+                                    <option value="2">Pre Owned</option>
                                     <option value="3">Used Car</option>
                                 </select>
+                                @error('condition')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Brand Name</label>
-                                <select class="select">
-                                    <option value="1">All Brand</option>
-                                    <option value="2">BMW</option>
-                                    <option value="3">Ferrari</option>
-                                    <option value="4">Marcediz Benz</option>
-                                    <option value="5">Hyundai</option>
-                                    <option value="6">Nissan</option>
+                                <select class="select @error('brand_id') is-invalid @enderror" name="brand_id">
+                                    <option value="">All Brand</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->brand_title }}</option>
+                                    @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Car Model</label>
-                                <select class="select">
-                                    <option value="1">All Model</option>
-                                    <option value="2">3-Series </option>
-                                    <option value="3">Carrera</option>
-                                    <option value="4">G-TR</option>
-                                    <option value="3">Macan</option>
-                                    <option value="3">N-Series</option>
-                                </select>
+                                @error('brand_id')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Choose Year</label>
-                                <select class="select">
-                                    <option value="1">All Year</option>
-                                    <option value="2">2023</option>
-                                    <option value="3">2022</option>
-                                    <option value="4">2021</option>
-                                    <option value="5">2020</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Choose Milieage</label>
-                                <select class="select">
-                                    <option value="1">All Milieage</option>
-                                    <option value="2">2000 Miles</option>
-                                    <option value="3">3000 Miles</option>
-                                    <option value="4">4000 Miles</option>
-                                    <option value="5">5000 Miles</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Price Range</label>
-                                <select class="select">
-                                    <option value="1">All Price</option>
-                                    <option value="2">$1,000 - $5,000</option>
-                                    <option value="3">$5,000 - $10,000</option>
-                                    <option value="4">$15,000 - $20,000</option>
-                                    <option value="5">$20,000 - $25,000</option>
-                                    <option value="6">$25,000 - $30,000</option>
+                                <select class="select @error('year') is-invalid @enderror" name="year">
+                                    <option value="">All Year</option>
+                                    <option>2023</option>
+                                    <option>2022</option>
+                                    <option>2021</option>
+                                    <option>2020</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Body Type</label>
-                                <select class="select">
-                                    <option value="1">All Body Type</option>
-                                    <option value="2">Sedan</option>
-                                    <option value="5">Compact</option>
-                                    <option value="3">Coupe</option>
-                                    <option value="4">Wagon</option>
+                                <select class="select @error('body_type') is-invalid @enderror" name="body_type">
+                                    <option value="">All Body Type</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
                                 </select>
+                                @error('body_type')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3 align-self-end">
+                        <div class="col-lg-3 align-self-end mt-3">
                             <button class="theme-btn" type="submit"><span class="far fa-search"></span> Find
                                 Your
                                 Car</button>
@@ -306,7 +275,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="car-records">
                 @if ($cars->count() > 0)
                     @php
                         $conditions = [
@@ -315,9 +284,9 @@
                             3 => ['label' => 'Used', 'class' => '3'],
                         ];
                     @endphp
-                    @foreach ($cars as $car)
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div class="car-item wow fadeInUp" data-wow-delay=".25s">
+                    @foreach ($cars as $index => $car)
+                        <div class="col-sm-6 col-lg-4 col-xl-3 car-list-item">
+                            <div class="car-item wow fadeInUp" data-wow-delay="{{ $index * 0.2 }}s">
                                 <div class="car-img">
                                     <span
                                         class="car-status status-{{ $conditions[$car->condition]['class'] }}">{{ $conditions[$car->condition]['label'] }}</span>
@@ -325,18 +294,27 @@
                                         $imagePath = $car->images->first()->image_path ?? null;
                                     @endphp
                                     @if ($imagePath && file_exists(public_path('storage/' . $imagePath)))
-                                        <img src="{{ asset('storage/' . $imagePath) }}" alt="{{ $car->name }}">
+                                        <img class="primary-img" src="{{ asset('storage/' . $imagePath) }}"
+                                            alt="{{ $car->name }}">
                                     @else
-                                        <img src="{{ asset('frontend/img/car/01.jpg') }}" alt="">
+                                        <img class="primary-img" src="{{ asset('frontend/img/car/01.jpg') }}"
+                                            alt="">
                                     @endif
                                     <div class="car-btns">
-                                        <a href="#"><i class="far fa-heart"></i></a>
-                                        <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                        <a class="add-to-wishlist" data-id="{{ $car->id }}"
+                                            data-image="{{ $imagePath }}" data-name="{{ $car->name }}"
+                                            data-brand="{{ $car->brand->brand_title }}"
+                                            data-slug="{{ route('car.details', $car->slug) }}"
+                                            data-category="{{ $car->category->category_name }}"><i
+                                                class="far fa-heart"></i></a>
+                                        <a class="add-to-compare" data-id="{{ $car->id }}">
+                                            <i class="far fa-arrows-repeat"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="car-content">
                                     <div class="car-top">
-                                        <h4><a href="#">Mercedes Benz Car</a></h4>
+                                        <h4><a href="#">{{ $car->name }}</a></h4>
                                         <div class="car-rate">
                                             @for ($i = 0; $i < $car->rating; $i++)
                                                 <i class="fas fa-star"></i>
@@ -362,7 +340,7 @@
                 @endif
             </div>
             <div class="text-center mt-4">
-                <a href="#" class="theme-btn">Load More <i class="far fa-arrow-rotate-right"></i> </a>
+                <a class="theme-btn" id="load-more">Load More <i class="far fa-arrow-rotate-right"></i> </a>
             </div>
         </div>
     </div>
@@ -649,8 +627,8 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
                                 <div class="blog-item-img">
-                                    <img src="{{ asset('storage/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}"
-                                        title="{{ $blog->blog_title }}" loading="lazy">
+                                    <img src="{{ asset('storage/' . $blog->blog_image) }}"
+                                        alt="{{ $blog->blog_title }}" title="{{ $blog->blog_title }}" loading="lazy">
                                 </div>
                                 <div class="blog-item-info">
                                     <div class="blog-item-meta">
@@ -677,3 +655,29 @@
     </div>
     <!-- blog area end -->
 @endsection
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $("#load-more").click(function() {
+                let offset = $('.car-list-item').length;
+
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('loadCars') }}",
+                    data: {
+                        offset: offset
+                    },
+                    success: function(response) {
+                        $("#car-records").append(response.html);
+
+                        if (!response.hasMore) {
+                            $("#load-more").hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

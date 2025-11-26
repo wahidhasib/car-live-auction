@@ -41,13 +41,113 @@ class FrontendPageController extends Controller
         });
 
         $data['cars'] = Cache::remember('cars', 1800, function () {
-            return Car::with(['brand:id,brand_title', 'category:id,category_slug,category_name', 'images:id,car_id,image_path'])
+            return Car::with([
+                'brand:id,brand_title',
+                'category:id,category_slug,category_name',
+                'images:id,car_id,image_path'
+            ])
                 ->latest()
                 ->limit(8)
                 ->get();
         });
 
         return view('frontend.index', $data);
+    }
+
+    public function loadCars(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $total = Car::count();
+            $output = '';
+
+            // Car condition labels & classes
+            $conditions = [
+                1 => ['label' => 'Brand New', 'class' => '1'],
+                2 => ['label' => 'Pre-owned', 'class' => '2'],
+                3 => ['label' => 'Used', 'class' => '3'],
+            ];
+
+            // Fetch cars with relations
+            $results = Car::with([
+                'brand:id,brand_title',
+                'category:id,category_slug,category_name',
+                'images:id,car_id,image_path'
+            ])
+                ->latest()
+                ->skip($request->offset)
+                ->limit(8)
+                ->get();
+
+            foreach ($results as $index => $car) {
+
+                $imagePath = $car->images->first()->image_path ?? null;
+
+                $statusClass = $conditions[$car->condition]['class'] ?? 'default';
+                $statusLabel = $conditions[$car->condition]['label'] ?? 'N/A';
+
+                $imageUrl = $imagePath && file_exists(public_path('storage/' . $imagePath))
+                    ? asset('storage/' . $imagePath)
+                    : asset('frontend/img/car/01.jpg');
+
+                $output .= '
+                    <div class="col-md-6 col-lg-4 col-xl-3 car-list-item">
+                        <div class="car-item wow fadeInUp" data-wow-delay="' . ($index * 0.2) . 's">
+                            <div class="car-img">
+                                <span class="car-status status-' . $statusClass . '">' . $statusLabel . '</span>
+                                <img src="' . $imageUrl . '" alt="' . $car->name . '">
+
+                                <div class="car-btns">
+                                    <a class="add-to-wishlist" 
+                                        data-id="' . $car->id . '" 
+                                        data-image="' . $imagePath . '" 
+                                        data-name="' . $car->name . '" 
+                                        data-brand="' . $car->brand->brand_title . '" 
+                                        data-category="' . $car->category->category_name . '">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                    <a class="add-to-compare" data-id="' . $car->id . '"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">' . $car->name . '</a></h4>
+
+                                    <div class="car-rate">';
+
+                // Rating stars loop
+                for ($i = 0; $i < $car->rating; $i++) {
+                    $output .= '<i class="fas fa-star"></i>';
+                }
+
+                $output .= '<span>(' . $car->rating . ')</span>
+                                    </div>
+                                </div>
+
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>' . $car->transmission . '</li>
+                                    <li><i class="far fa-road"></i>' . $car->milage . '</li>
+                                    <li><i class="far fa-car"></i>Model: ' . $car->year . '</li>
+                                    <li><i class="far fa-gas-pump"></i>' . $car->category->category_name . '</li>
+                                </ul>
+
+                                <div class="car-footer">
+                                    <span class="car-price">৳ ' . $car->price . '</span>
+                                    <a href="' . route('car.details', $car->slug) . '" class="theme-btn">
+                                        <span class="far fa-eye"></span>Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+            } // loop end
+
+            return response()->json([
+                'html' => $output,
+                'hasMore' => ($request->offset + $results->count() < $total)
+            ]);
+        }
     }
 
     public function carDetails(string $slug)
@@ -57,7 +157,14 @@ class FrontendPageController extends Controller
             ->firstOrFail();
         // return $car;
 
-        return view('frontend.car-details', compact('car'));
+        $relatedCars = Car::with('images:id,car_id,image_path')
+            ->where('id', '!=', $car->id)
+            ->where('body_type', $car->body_type)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('frontend.car-details', compact('car', 'relatedCars'));
     }
 
     public function aboutPage()
@@ -99,8 +206,54 @@ class FrontendPageController extends Controller
         return view('frontend.testimonials', compact('testimonials'));
     }
 
+    public function calculatorPage()
+    {
+        return view('frontend.emi-calculator');
+    }
+
     public function contactPage()
     {
         return view('frontend.contact');
+    }
+
+
+    public function calculateEMI(Request $request)
+    {
+        $request->validate([
+            'price' => 'required|numeric|min:1',
+            'rate' => 'required|numeric|between:0,100',
+            'period' => 'required|numeric|min:1',
+            'down_payment' => 'required|numeric|min:0'
+        ]);
+
+        $P = $request->price - $request->down_payment; // Loan Amount
+        $R = ($request->rate / 12) / 100;              // Monthly Interest Rate
+        $N = $request->period * 12;                    // Months
+
+        // Prevent error when interest rate is 0%
+        if ($R == 0) {
+            $EMI = $P / $N;
+        } else {
+            $EMI = ($P * $R * pow(1 + $R, $N)) / (pow(1 + $R, $N) - 1);
+        }
+
+        // AJAX Response
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'emi' => round($EMI),
+                'loan_amount' => $P,
+                'total_payable' => round($EMI * $N),
+                'total_interest' => round(($EMI * $N) - $P),
+            ]);
+        }
+
+        // Fallback (non-ajax)
+        return back()->with('emi', round($EMI));
+    }
+
+    public function commingSoonPage()
+    {
+        return view('frontend.comming-soon');
     }
 }
