@@ -107,6 +107,10 @@ Route::get('/optimize', function () {
     Artisan::call('route:cache');
     Artisan::call('view:cache');
     Artisan::call('optimize');
+    return "Configaration optimize successfully!";
+});
+
+Route::get('/storage-link', function () {
     Artisan::call('storage:link');
-    return "Configaration successfully!";
+    return "Storage Linked!";
 });

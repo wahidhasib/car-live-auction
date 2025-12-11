@@ -8,10 +8,10 @@
     <!-- breadcrumb -->
     <div class="site-breadcrumb" style="background: url({{ asset('storage/' . $settings->common_bg) }})">
         <div class="container">
-            <h2 class="breadcrumb-title">Services</h2>
+            <h2 class="breadcrumb-title">Testimonials</h2>
             <ul class="breadcrumb-menu">
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li class="active">Services</li>
+                <li class="active">Testimonials</li>
             </ul>
         </div>
     </div>

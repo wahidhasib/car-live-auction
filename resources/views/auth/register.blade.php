@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- breadcrumb -->
-    <div class="site-breadcrumb" style="background: url({{ asset('frontend/img/breadcrumb/01.jpg') }})">
+    <div class="site-breadcrumb" style="background: url({{ asset('storage/' . $settings->common_bg) }})">
         <div class="container">
             <h2 class="breadcrumb-title">Register</h2>
             <ul class="breadcrumb-menu">
@@ -24,8 +24,8 @@
             <div class="col-md-5 mx-auto">
                 <div class="login-form">
                     <div class="login-header">
-                        <img src="{{ asset('frontend/img/logo/logo.png') }}" alt="">
-                        <p>Create your motex account</p>
+                        <img src="{{ asset('storage/' . $settings->header_logo) }}" alt="{{ $settings->company_name }}">
+                        <p>Create your account</p>
                     </div>
                     <form action="{{ route('register.action') }}" method="POST">
                         @csrf

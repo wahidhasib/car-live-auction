@@ -6,11 +6,11 @@
 
 @section('content')
     <!-- breadcrumb -->
-    <div class="site-breadcrumb" style="background: url({{ asset('frontend/img/breadcrumb/01.jpg') }})">
+    <div class="site-breadcrumb" style="background: url({{ asset('storage/' . $settings->common_bg) }})">
         <div class="container">
             <h2 class="breadcrumb-title">Login</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ route('home') }}">Home</a></li>
                 <li class="active">Login</li>
             </ul>
         </div>
@@ -24,7 +24,7 @@
             <div class="col-md-5 mx-auto">
                 <div class="login-form">
                     <div class="login-header">
-                        <img src="{{ asset('frontend/img/logo/logo.png') }}" alt="">
+                        <img src="{{ asset('storage/' . $settings->header_logo) }}" alt="{{ $settings->company_name }}">
                         @if (session('authError'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>{{ session('authError') }}</strong>

@@ -21,33 +21,22 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-2">
+                <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box list">
                         <h4 class="footer-widget-title">Quick Links</h4>
                         <ul class="footer-list">
-                            <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Update News</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Testimonials</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Terms Of Service</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Privacy policy</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Our Dealers</a></li>
+                            <li><a href="{{ route('about') }}"><i class="fas fa-caret-right"></i> About Us</a></li>
+                            <li><a href="{{ route('services') }}"><i class="fas fa-caret-right"></i> Services</a>
+                            </li>
+                            <li><a href="{{ route('contact') }}"><i class="fas fa-caret-right"></i> Contact</a></li>
+                            <li><a href="{{ route('testimonials') }}"><i class="fas fa-caret-right"></i>
+                                    Testimonials</a></li>
+                            <li><a href="{{ route('calculator') }}"><i class="fas fa-caret-right"></i>
+                                    EMI Calculator</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="footer-widget-box list">
-                        <h4 class="footer-widget-title">Support Center</h4>
-                        <ul class="footer-list">
-                            <li><a href="#"><i class="fas fa-caret-right"></i> FAQ's</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Affiliates</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Booking Tips</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Sell Vehicles</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                            <li><a href="#"><i class="fas fa-caret-right"></i> Sitemap</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box list">
                         <h4 class="footer-widget-title">Newsletter</h4>
                         <div class="footer-newsletter">
