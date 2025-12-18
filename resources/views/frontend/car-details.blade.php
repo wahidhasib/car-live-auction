@@ -37,6 +37,13 @@
 
 
     <!-- car single -->
+    @php
+        $conditions = [
+            1 => ['label' => 'New', 'class' => '1'],
+            2 => ['label' => 'Pre-owend', 'class' => '2'],
+            3 => ['label' => 'Used', 'class' => '3'],
+        ];
+    @endphp
 
     <div class="car-item-single bg py-120">
         <div class="container">
