@@ -39,12 +39,12 @@ class CarUpdateRequest extends FormRequest
             'doors'           => 'required|integer|min:2|max:6',
             'cylenders'       => 'required|integer|min:1|max:12',
             'engine'          => 'required|integer|min:600|max:8000',
-            'vin_number' => 'required|string|max:50',
+            'vin_number'      => 'nullable|string|max:50',
 
             // SEO
-            'meta_title'       => 'required|string|max:255',
-            'meta_description' => 'required|string|max:255',
-            'meta_keywords'    => 'required|string|max:255',
+            'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
+            'meta_keywords'    => 'nullable|string|max:255',
 
             // Images
             'images'           => 'nullable|array|max:10',

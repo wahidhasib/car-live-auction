@@ -99,13 +99,13 @@
                             <label for="carousel_background" class="form-label">Background Image</label>
                             <input type="file" name="carousel_background" id="carousel_background"
                                 class="form-control @error('carousel_background') is-invalid @enderror"
-                                name="carousel_background" required>
+                                name="carousel_background">
                             @error('carousel_background')
                                 <div class="mt-1 text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group mt-2">
-                            <label for="carousel_status" class="form-label">Background Image</label>
+                            <label for="carousel_status" class="form-label">Status</label>
                             <select name="carousel_status" id="carousel_status"
                                 class="form-control @error('carousel_status') is-invalid @enderror" required>
                                 <option value="1">Published</option>

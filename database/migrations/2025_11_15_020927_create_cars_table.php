@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->integer('rating');
             $table->longText('description');
-            $table->decimal('price');
+            $table->bigInteger('price');
             $table->foreignId('body_type')->references('id')->on('categories')->cascadeOnDelete();
             $table->integer('condition');
             $table->string('milage');
@@ -29,12 +29,12 @@ return new class extends Migration
             $table->integer('doors');
             $table->integer('cylenders');
             $table->integer('engine');
-            $table->string('vin_number')->unique();
+            $table->string('vin_number')->unique()->nullable();
 
             // SEO
-            $table->string('meta_title');
-            $table->string('meta_description');
-            $table->string('meta_keywords');
+            $table->string('meta_title')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
             $table->timestamps();
         });
     }

@@ -38,7 +38,7 @@ class CarouselController extends Controller
             'carousel_text' => 'required|string|max:255',
             'carousel_status' => 'required|integer|min:1',
             'carousel_image' => 'required|image|mimes:png,jpg,jpeg,gif',
-            'carousel_background' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'carousel_background' => 'nullable|image|mimes:png,jpg,jpeg,gif',
         ]);
 
         try {

@@ -34,7 +34,7 @@
                             @php
                                 $conditions = [
                                     1 => ['label' => 'Brand New', 'class' => '1'],
-                                    2 => ['label' => 'Pre-owned', 'class' => '2'],
+                                    2 => ['label' => 'Re-Condition', 'class' => '2'],
                                     3 => ['label' => 'Used', 'class' => '3'],
                                 ];
                             @endphp

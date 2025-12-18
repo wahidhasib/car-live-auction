@@ -15,7 +15,7 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="hero-content">
                                     <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">
-                                        {{ $carousel->carousel_title }}
+                                        {{ $carousel->carousel_subtitle }}
                                     </h6>
                                     <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
                                         {{ Str::beforeLast($carousel->carousel_title, ' ') }}
@@ -97,9 +97,8 @@
                                 <label>Car Condition</label>
                                 <select class="select @error('condition') is-invalid @enderror" name="condition">
                                     <option value="">All Status</option>
-                                    <option value="1">New Car</option>
-                                    <option value="2">Pre Owned</option>
-                                    <option value="3">Used Car</option>
+                                    <option value="1">Brand New</option>
+                                    <option value="2">Re-Condition</option>
                                 </select>
                                 @error('condition')
                                     <div class="mt-1 text-danger">{{ $message }}</div>
@@ -280,7 +279,7 @@
                     @php
                         $conditions = [
                             1 => ['label' => 'Brand New', 'class' => '1'],
-                            2 => ['label' => 'Pre-owned', 'class' => '2'],
+                            2 => ['label' => 'Re-Condition', 'class' => '2'],
                             3 => ['label' => 'Used', 'class' => '3'],
                         ];
                     @endphp

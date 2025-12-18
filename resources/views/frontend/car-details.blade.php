@@ -37,13 +37,6 @@
 
 
     <!-- car single -->
-    @php
-        $conditions = [
-            1 => ['label' => 'New', 'class' => '1'],
-            2 => ['label' => 'Pre-owend', 'class' => '2'],
-            3 => ['label' => 'Used', 'class' => '3'],
-        ];
-    @endphp
 
     <div class="car-item-single bg py-120">
         <div class="container">
@@ -200,17 +193,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-4 col-6">
-                                            <div class="car-key-item">
-                                                <div class="car-key-icon">
-                                                    <i class="flaticon-drive"></i>
-                                                </div>
-                                                <div class="car-key-content">
-                                                    <span>VIN</span>
-                                                    <h6>{{ $car->vin_number }}</h6>
+                                        @if ($car->vin_number)
+                                            <div class="col-lg-3 col-md-4 col-6">
+                                                <div class="car-key-item">
+                                                    <div class="car-key-icon">
+                                                        <i class="flaticon-drive"></i>
+                                                    </div>
+                                                    <div class="car-key-content">
+                                                        <span>VIN</span>
+                                                        <h6>{{ $car->vin_number }}</h6>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +327,7 @@
                             @php
                                 $conditions = [
                                     1 => ['label' => 'Brand New', 'class' => '1'],
-                                    2 => ['label' => 'Pre-owned', 'class' => '2'],
+                                    2 => ['label' => 'Re-Condition', 'class' => '2'],
                                     3 => ['label' => 'Used', 'class' => '3'],
                                 ];
                             @endphp

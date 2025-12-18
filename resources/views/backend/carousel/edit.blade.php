@@ -20,7 +20,7 @@
                             <label for="carousel_subtitle" class="form-label">Sub Title</label>
                             <input type="text" placeholder="Sub title"
                                 class="form-control @error('carousel_subtitle') is-invalid @enderror" id="carousel_subtitle"
-                                name="carousel_subtitle" value="{{ $carousel->carousel_title }}" required>
+                                name="carousel_subtitle" value="{{ $carousel->carousel_subtitle }}" required>
                             @error('carousel_subtitle')
                                 <div class="mt-1 text-danger">{{ $message }}</div>
                             @enderror
@@ -29,7 +29,7 @@
                             <label for="carousel_title" class="form-label">Title</label>
                             <input type="text" placeholder="Title..."
                                 class="form-control @error('carousel_title') is-invalid @enderror" id="carousel_title"
-                                name="carousel_title" value="{{ $carousel->carousel_subtitle }}" required>
+                                name="carousel_title" value="{{ $carousel->carousel_title }}" required>
                             @error('carousel_title')
                                 <div class="mt-1 text-danger">{{ $message }}</div>
                             @enderror

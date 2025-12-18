@@ -85,7 +85,8 @@
                                 <select name="condition" id="condition"
                                     class="form-control @error('condition') is-invalid @enderror">
                                     <option {{ old('condition') == 1 ? 'selected' : '' }} value="1">Brand new</option>
-                                    <option {{ old('condition') == 1 ? 'selected' : '' }} value="2">Pre-owned</option>
+                                    <option {{ old('condition') == 1 ? 'selected' : '' }} value="2">Re-Condition
+                                    </option>
                                     <option {{ old('condition') == 1 ? 'selected' : '' }} value="3">Used</option>
                                 </select>
                                 @error('condition')
@@ -200,7 +201,7 @@
                                 <label for="vin_number" class="form-label">VIN Number</label>
                                 <input type="text" name="vin_number" id="vin_number"
                                     class="form-control @error('vin_number') is-invalid @enderror"
-                                    value="{{ old('vin_number') }}" required>
+                                    value="{{ old('vin_number') }}">
                                 @error('vin_number')
                                     <div class="mt-1 text-danger">{{ $message }}</div>
                                 @enderror

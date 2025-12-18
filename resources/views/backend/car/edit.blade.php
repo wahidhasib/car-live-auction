@@ -70,7 +70,8 @@
                                 <label for="condition" class="form-label">Car Condition</label>
                                 <select name="condition" id="condition" class="form-control">
                                     <option value="1" {{ $car->condition == 1 ? 'selected' : '' }}>Brand New</option>
-                                    <option value="2" {{ $car->condition == 2 ? 'selected' : '' }}>Pre-Owned</option>
+                                    <option value="2" {{ $car->condition == 2 ? 'selected' : '' }}>Re-Condition
+                                    </option>
                                     <option value="3" {{ $car->condition == 3 ? 'selected' : '' }}>Used</option>
                                 </select>
                             </div>
@@ -149,7 +150,7 @@
                             <div class="mt-2 col-lg-6">
                                 <label for="vin_number" class="form-label">VIN Number</label>
                                 <input type="text" name="vin_number" id="vin_number" class="form-control"
-                                    value="{{ $car->vin_number }}" required>
+                                    value="{{ $car->vin_number }}">
                             </div>
 
                             {{-- Price --}}
