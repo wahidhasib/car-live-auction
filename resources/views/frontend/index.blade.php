@@ -205,7 +205,7 @@
     <div class="counter-area pt-30 pb-30">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-6">
                     <div class="counter-box">
                         <div class="icon">
                             <i class="flaticon-car-rental"></i>
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-6">
                     <div class="counter-box">
                         <div class="icon">
                             <i class="flaticon-car-key"></i>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-6">
                     <div class="counter-box">
                         <div class="icon">
                             <i class="flaticon-screwdriver"></i>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-6">
                     <div class="counter-box">
                         <div class="icon">
                             <i class="flaticon-review"></i>

@@ -1454,7 +1454,7 @@ label {
 .hero-single .hero-img {
     position: absolute;
     right: 100px;
-    bottom: 120px;
+    bottom: 40px;
     width: 50%;
     z-index: -1;
 }
@@ -1540,6 +1540,43 @@ label {
     }
     .hero-single .hero-content .hero-btn {
         gap: 1rem;
+    }
+}
+
+@media all and (max-width: 576px) {
+    .hero-single {
+        padding-top: 70px;
+        padding-bottom: 60px;
+    }
+    .theme-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    .hero-single .hero-content .hero-title {
+        font-size: 36px;
+    }
+    .hero-single .hero-content .hero-sub-title {
+        font-size: 18px;
+    }
+    .hero-single .hero-content p {
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+    .find-car-form .form-group {
+        margin-top: 10px;
+    }
+    .nice-select {
+        height: 40px;
+        line-height: 40px;
+    }
+    .find-car-form .theme-btn {
+        margin-top: 0;
+    }
+    .counter-box .icon {
+        font-size: 40px;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
     }
 }
 

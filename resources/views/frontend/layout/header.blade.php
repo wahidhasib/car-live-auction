@@ -38,8 +38,8 @@
                             <a href="{{ $settings->instagram }}" target="_blank"><i
                                     class="fa-brands fa-instagram"></i></a>
                         @endif
-                        @if ($settings->instagram)
-                            <a href="{{ $settings->instagram }}"><i class="fab fa-instagram"></i></a>
+                        @if ($settings->youtube)
+                            <a href="{{ $settings->youtube }}"><i class="fab fa-youtube"></i></a>
                         @endif
                         @if ($settings->linkedin)
                             <a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin"></i></a>
