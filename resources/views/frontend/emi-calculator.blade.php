@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- breadcrumb -->
-    <div class="site-breadcrumb" style="background: url({{ asset('storage/' . $settings->common_banner) }})">
+    <div class="site-breadcrumb" style="background: url({{ asset('storage/' . $settings->common_bg) }})">
         <div class="container">
             <h2 class="breadcrumb-title">Calculator</h2>
             <ul class="breadcrumb-menu">

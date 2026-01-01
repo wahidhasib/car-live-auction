@@ -91,7 +91,7 @@
                                 class="nav-link {{ request()->routeIs('testimonials') ? 'active' : '' }}"
                                 href="{{ route('testimonials') }}">Testimonials</a>
                         </li>
-                        <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}"><a class="nav-link"
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                 href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                     <div class="nav-right">
