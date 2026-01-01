@@ -33,9 +33,6 @@ class CarouselController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'carousel_subtitle' => 'required|string|max:255',
-            'carousel_title' => 'required|string|max:255',
-            'carousel_text' => 'required|string|max:255',
             'carousel_status' => 'required|integer|min:1',
             'carousel_image' => 'required|image|mimes:png,jpg,jpeg,gif',
             'carousel_background' => 'nullable|image|mimes:png,jpg,jpeg,gif',
@@ -82,9 +79,6 @@ class CarouselController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
-            'carousel_subtitle' => 'required|string|max:255',
-            'carousel_title' => 'required|string|max:255',
-            'carousel_text' => 'required|string|max:255',
             'carousel_status' => 'required|integer|min:1',
             'carousel_image' => 'nullable|image|mimes:png,jpg,jpeg,gif',
             'carousel_background' => 'nullable|image|mimes:png,jpg,jpeg,gif',
@@ -93,12 +87,10 @@ class CarouselController extends Controller
         try {
             $carousel = Carousel::findOrFail($id);
 
-            foreach (['carousel_image', 'carousel_background'] as $image) {
-                if ($request->hasFile($image)) {
-                    $data[$image] = uploadFiles($request->file($image), 'uploads/carousel', $carousel->$image);
-                } else {
-                    $data[$image] = $carousel->$image;
-                }
+            $oldImage = public_path('storage/' . $carousel->carousel_image);
+
+            if (file_exists($oldImage)) {
+                unlink($oldImage);
             }
 
             $carousel->update($data);
@@ -119,12 +111,10 @@ class CarouselController extends Controller
         $carousel = Carousel::findOrFail($id);
 
         try {
-            foreach (['carousel_image', 'carousel_background'] as $image) {
-                $oldImage = public_path('storage/' . $carousel->$image);
+            $oldImage = public_path('storage/' . $carousel->carousel_image);
 
-                if (file_exists($oldImage)) {
-                    unlink($oldImage);
-                }
+            if (file_exists($oldImage)) {
+                unlink($oldImage);
             }
 
             $carousel->delete();

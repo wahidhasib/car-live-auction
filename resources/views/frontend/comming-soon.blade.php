@@ -40,6 +40,23 @@
                     <a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin-in"></i></a>
                 @endif
             </div>
+            <div class="row align-items-center justify-content-center mt-40">
+                <div class="col-12 col-md-9 col-lg-7">
+                    <div class="coming-soon-content text-white text-center">
+                        <h1 class="text-white">Let’s Talk on WhatsApp</h1>
+                        <p class="lead">We’re here to help! Message us on WhatsApp for inquiries, pricing, or any support
+                            you need. We usually reply fast.
+                        </p>
+                        <div class="flex align-items-center justify-content-center">
+                            <a href="https://wa.me/{{ $settings->phone }}?text=Hello%20I%20am%20interested%20in%20your%20services.%20Please%20share%20more%20details."
+                                target="_blank" class="whatsapp-btn-link">
+                                <img src="{{ asset('frontend/img/whatsapp.png') }}" alt="WhatsApp">
+                                <span>Chat on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- coming soon end -->

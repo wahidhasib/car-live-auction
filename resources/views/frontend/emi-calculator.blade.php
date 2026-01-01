@@ -32,7 +32,7 @@
                             <form action="#" id="emi-form">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="number" name="price" id="price"
+                                    <input type="number" name="price" id="price" step="any"
                                         class="form-control @error('price') is-invalid @enderror" placeholder="৳ Price">
                                     @error('price')
                                         <div class="mt-1 text-danger">{{ $message }}</div>
@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" id="rate"
+                                            <input type="number" id="rate" step="any"
                                                 class="form-control @error('rate') is-invalid @enderror" name="rate"
                                                 placeholder="% Rate">
                                             @error('rate')
@@ -51,9 +51,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" min="1" value="12"
+                                            <input type="number" min="1"
                                                 class="form-control @error('period') is-invalid @enderror" name="period"
-                                                id="period" placeholder="Loan Period">
+                                                id="period" step="any" placeholder="Month">
                                             @error('period')
                                                 <div class="mt-1 text-danger">{{ $message }}</div>
                                             @enderror
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" name="down_payment"
+                                    <input type="number" name="down_payment" step="any"
                                         class="form-control @error('down_payment') is-invalid @enderror" id="down_payment"
                                         placeholder="৳ Down Payment">
                                 </div>

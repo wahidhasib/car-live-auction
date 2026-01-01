@@ -5,7 +5,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box about-us">
                         <a href="#" class="footer-logo">
-                            <img src="{{ asset('storage/' . $settings->footer_logo) }}"
+                            <img src="{{ $settings->imageUrl('footer_logo', 'frontend/img/logo/logo.png') }}"
                                 alt="{{ $settings->company_name }}" title="{{ $settings->company_name }}" loading="lazy">
                         </a>
                         <p class="mb-3">

@@ -14,7 +14,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="blog_title" class="form-label fw-bold">Blog Title</label>
                         <input type="text" value="{{ $blog->blog_title }}" placeholder="Title..." id="blog_title"
-                            class="form-control @error('blog_title') is-invalid @enderror" name="blog_title" required>
+                            class="form-control @error('blog_title') is-invalid @enderror" name="blog_title">
                         @error('blog_title')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -38,7 +38,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="author_name" class="form-label fw-bold">Author Name</label>
                         <input type="text" value="{{ $blog->author_name }}" placeholder="Title..." id="author_name"
-                            class="form-control @error('author_name') is-invalid @enderror" name="author_name" required>
+                            class="form-control @error('author_name') is-invalid @enderror" name="author_name">
                         @error('author_name')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -46,7 +46,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="designation" class="form-label fw-bold">Author Designation</label>
                         <input type="text" value="{{ $blog->designation }}" placeholder="Designation..." id="designation"
-                            class="form-control @error('designation') is-invalid @enderror" name="designation" required>
+                            class="form-control @error('designation') is-invalid @enderror" name="designation">
                         @error('designation')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -54,7 +54,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="facebook" class="form-label fw-bold">Facebook</label>
                         <input type="text" value="{{ $blog->facebook }}" placeholder="Facebook link..." id="facebook"
-                            class="form-control @error('facebook') is-invalid @enderror" name="facebook" required>
+                            class="form-control @error('facebook') is-invalid @enderror" name="facebook">
                         @error('facebook')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -62,7 +62,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="instagram" class="form-label fw-bold">Instagram</label>
                         <input type="text" value="{{ $blog->instagram }}" placeholder="Instagram link..." id="instagram"
-                            class="form-control @error('instagram') is-invalid @enderror" name="instagram" required>
+                            class="form-control @error('instagram') is-invalid @enderror" name="instagram">
                         @error('instagram')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -70,7 +70,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="youtube" class="form-label fw-bold">Youtube</label>
                         <input type="text" value="{{ $blog->youtube }}" placeholder="youtube link..." id="youtube"
-                            class="form-control @error('youtube') is-invalid @enderror" name="youtube" required>
+                            class="form-control @error('youtube') is-invalid @enderror" name="youtube">
                         @error('youtube')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -78,7 +78,7 @@
                     <div class="form-group mt-2 col-sm-6">
                         <label for="whatsapp" class="form-label fw-bold">Whatsapp number</label>
                         <input type="text" value="{{ $blog->whatsapp }}" placeholder="whatsapp number..." id="whatsapp"
-                            class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp" required>
+                            class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp">
                         @error('whatsapp')
                             <div class="mt-1 text-danger">{{ $message }}</div>
                         @enderror
@@ -93,7 +93,7 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('blog_description', {
             removePlugins: 'exportpdf'

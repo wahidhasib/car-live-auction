@@ -53,7 +53,8 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container position-relative">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('storage/' . $settings->header_logo) }}" alt="logo">
+                    <img src="{{ $settings->imageUrl($settings->header_logo, 'frontend/img/logo/logo.png') }}"
+                        alt="logo">
                 </a>
                 <div class="mobile-menu-right">
                     <div class="search-btn">
@@ -74,6 +75,8 @@
                                 href="{{ route('home') }}">Home</a></li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
                                 href="{{ route('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('cars') ? 'active' : '' }}"
+                                href="{{ route('cars') }}">Cars</a></li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
                                 href="{{ route('services') }}">Services</a></li>
                         <li class="nav-item dropdown">

@@ -40,18 +40,42 @@ class FrontendPageController extends Controller
             return Blog::latest()->limit(3)->get();
         });
 
-        $data['cars'] = Cache::remember('cars', 1800, function () {
-            return Car::with([
-                'brand:id,brand_title',
-                'category:id,category_slug,category_name',
-                'images:id,car_id,image_path'
-            ])
-                ->latest()
-                ->limit(8)
-                ->get();
-        });
+        $data['cars'] = Car::with([
+            'brand:id,brand_title',
+            'category:id,category_slug,category_name',
+            'images:id,car_id,image_path'
+        ])
+            ->latest()
+            ->limit(8)
+            ->get();
 
         return view('frontend.index', $data);
+    }
+
+    public function getModels(Request $request)
+    {
+        $models = Car::select('id', 'name')
+            ->where('brand_id', $request->brand_id)
+            ->orderBy('name')
+            ->get();
+
+        return response()->json([
+            'status' => true,
+            'models' => $models
+        ]);
+    }
+
+    public function carsPage()
+    {
+        $data['cars'] = Car::with([
+            'brand:id,brand_title',
+            'category:id,category_slug,category_name',
+            'images:id,car_id,image_path'
+        ])
+            ->latest()
+            ->paginate(20);
+
+        return view('frontend.all-cars', $data);
     }
 
     public function loadCars(Request $request)
@@ -241,10 +265,10 @@ class FrontendPageController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'success' => true,
-                'emi' => round($EMI),
-                'loan_amount' => $P,
-                'total_payable' => round($EMI * $N),
-                'total_interest' => round(($EMI * $N) - $P),
+                'emi' => number_format($EMI, 2, '.', ''),
+                'loan_amount' => number_format($P, 2, '.', ''),
+                'total_payable' => number_format($EMI * $N, 2, '.', ''),
+                'total_interest' => number_format(($EMI * $N) - $P, 2, '.', ''),
             ]);
         }
 

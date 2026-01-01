@@ -27,7 +27,9 @@ use Illuminate\Support\Facades\Artisan;
 // 🏠 Frontend Routes
 Route::controller(FrontendPageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+    Route::get('/load-models', 'getModels')->name('getModels');
     Route::get('/load-cars', 'loadCars')->name('loadCars');
+    Route::get('/cars', 'carsPage')->name('cars');
     Route::get('/cars/{slug}', 'carDetails')->name('car.details');
     Route::get('/about', 'aboutPage')->name('about');
     Route::get('/services', 'servicesPage')->name('services');

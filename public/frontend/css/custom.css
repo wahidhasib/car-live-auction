@@ -129,3 +129,83 @@
     height: 200px;
     object-fit: cover;
 }
+
+
+/* year range slider */
+
+.slider-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+#yearRangeSlider {
+    margin-top: 10px;
+}
+
+.noUi-target {
+    border-radius: 20px !important;
+    cursor: pointer;
+}
+
+.noUi-horizontal {
+    height: 10px !important;
+}
+
+.noUi-horizontal .noUi-handle {
+    height: 20px !important;
+    width: 20px !important;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.whatsapp-btn-link {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background-color: #13b950;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.whatsapp-btn-link img {
+    width: 24px;
+    height: 24px;
+}
+
+.whatsapp-btn-link:hover {
+    background-color: #1ebe5d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.single-carousel {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: white;
+}
+
+.video-content {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.single-carousel img {
+    width: 100%;
+}
+
+.find-car {
+    margin-top: -40px !important;
+}
+
+@media screen and (max-width: 992px) {
+    .find-car {
+        margin-top: 10px !important;
+    }
+}

@@ -12,8 +12,7 @@
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon"
-        href="{{ $settings->fav_icon ? asset('storage/' . $settings->fav_icon) : asset('default-favicon.png') }}"
+    <link rel="shortcut icon" href="{{ $settings->imageUrl($settings->fav_icon, 'frontend/img/logo/favicon.png') }}"
         type="image/png">
 
     <title>{{ $settings->company_name ?? 'Company Name' }} | @yield('title')</title>
@@ -142,7 +141,7 @@
             <div class="sidebar-content">
                 <button type="button" class="close-sidebar-popup"><i class="far fa-xmark"></i></button>
                 <div class="sidebar-logo">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="{{ $settings->imageUrl('header_logo', 'frontend/img/logo/logo.png') }}" alt="">
                 </div>
                 <div class="sidebar-about">
                     <h4>{{ $settings->about_subtitle }}</h4>
@@ -511,7 +510,7 @@
     </script>
 
     <!-- FlexSlider Plugin (missing in your setup, REQUIRED) -->
-    <script src="{{ asset('frontend/js/jquery.flexslider-min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/jquery.flexslider-min.js') }}"></script> --}}
 
     <!-- Your custom Flex Slider init -->
     <script src="{{ asset('frontend/js/flex-slider.js') }}"></script>

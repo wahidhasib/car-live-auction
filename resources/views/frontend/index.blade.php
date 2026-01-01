@@ -4,42 +4,22 @@
     Home
 @endsection
 
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css">
+@endpush
+
 @section('content')
     <!-- hero slider -->
     <div class="hero-section">
         <div class="hero-slider owl-carousel owl-theme">
             @forelse ($carousels as $carousel)
-                <div class="hero-single" style="background: url({{ asset('storage/' . $carousel->carousel_background) }})">
-                    <div class="container">
+                <div class="col-12 single-carousel mt-50 mt-lg-0">
+                    <div class="container-fluid">
                         <div class="row align-items-center">
-                            <div class="col-md-12 col-lg-6">
-                                <div class="hero-content">
-                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">
-                                        {{ $carousel->carousel_subtitle }}
-                                    </h6>
-                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                        {{ Str::beforeLast($carousel->carousel_title, ' ') }}
-                                        <span>{{ Str::afterLast($carousel->carousel_title, ' ') }}</span>
-                                    </h1>
-                                    <p data-animation="fadeInLeft" data-delay=".75s">
-                                        {{ $carousel->carousel_text }}
-                                    </p>
-                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                        <a title="Go to {{ $settings->company_name }} - About" href="{{ route('about') }}"
-                                            class="theme-btn">About More<i class="fas fa-arrow-right-long"></i></a>
-                                        {{-- <a href="{{ route('about') }}" class="theme-btn theme-btn2">Learn More<i
-                                                class="fas fa-arrow-right-long"></i></a> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <div class="hero-right">
-                                    <div class="hero-img">
-                                        <img src="{{ asset('storage/' . $carousel->carousel_image) }}"
-                                            alt="{{ $carousel->carousel_title }}" data-animation="fadeInRight"
-                                            title="{{ $carousel->carousel_title }}" loading="lazy" data-delay=".25s">
-                                    </div>
-                                </div>
+                            <div class="col-md-12">
+                                <img src="{{ asset('storage/' . $carousel->carousel_image) }}"
+                                    alt="{{ $settings->company_name }}" data-animation="fadeInRight"
+                                    title="{{ $settings->company_name }}" loading="lazy" data-delay=".25s">
                             </div>
                         </div>
                     </div>
@@ -108,7 +88,8 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Brand Name</label>
-                                <select class="select @error('brand_id') is-invalid @enderror" name="brand_id">
+                                <select class="select @error('brand_id') is-invalid @enderror" id="brand_id"
+                                    name="brand_id">
                                     <option value="">All Brand</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->brand_title }}</option>
@@ -119,30 +100,24 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label>Choose Year</label>
-                                <select class="select @error('year') is-invalid @enderror" name="year">
-                                    <option value="">All Year</option>
-                                    <option>2023</option>
-                                    <option>2022</option>
-                                    <option>2021</option>
-                                    <option>2020</option>
+                                <label>Model</label>
+                                <select class="select @error('model_id') is-invalid @enderror" id="model_id"
+                                    name="model_id">
+                                    <option value="">All Models</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Body Type</label>
-                                <select class="select @error('body_type') is-invalid @enderror" name="body_type">
-                                    <option value="">All Body Type</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('body_type')
+                                @error('model_id')
                                     <div class="mt-1 text-danger">{{ $message }}</div>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="slider-container">
+                                <label for="yearRange">Year Range: <span id="yearRangeValue"></span></label>
+                                <div id="yearRangeSlider"></div>
                             </div>
                         </div>
                         <div class="col-lg-3 align-self-end mt-3">
@@ -165,7 +140,7 @@
                 <div class="col-lg-6">
                     <div class="about-left wow fadeInLeft" data-wow-delay=".25s">
                         <div class="about-img">
-                            <img src="{{ asset('storage/' . $settings->about_image) }}"
+                            <img src="{{ $settings->imageUrl($settings->about_image, 'frontend/img/slider/hero-4.png') }}"
                                 alt="{{ $settings->company_name }} - about" loading="lazy"
                                 title="{{ $settings->company_name }}">
                         </div>
@@ -339,7 +314,7 @@
                 @endif
             </div>
             <div class="text-center mt-4">
-                <a class="theme-btn" id="load-more">Load More <i class="far fa-arrow-rotate-right"></i> </a>
+                <a class="theme-btn" href="{{ route('cars') }}">View More</a>
             </div>
         </div>
     </div>
@@ -367,9 +342,8 @@
                         <a href="#" class="category-item wow fadeInUp"
                             data-wow-delay="{{ $loop->iteration * 0.25 }}s">
                             <div class="category-img">
-                                <img src="{{ asset('storage/' . $category->category_image) }}"
-                                    alt="{{ $category->category_name }}" title="{{ $category->category_name }}"
-                                    loading="lazy">
+                                <img src="{{ $category->category_image }}" alt="{{ $category->category_name }}"
+                                    title="{{ $category->category_name }}" loading="lazy">
                             </div>
                             <h5>{{ $category->category_name }}</h5>
                         </a>
@@ -393,8 +367,7 @@
     <!-- video area -->
     <div class="video-area pb-120">
         <div class="container-fluid px-0">
-            <div class="video-content"
-                style="background-image: url({{ asset('storage/' . $settings->banner_background) }});"
+            <div class="video-content" style="background: url('{{ asset('storage/' . $settings->banner_background) }}')"
                 title="watch on youtube {{ $settings->company_name }}">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
@@ -429,7 +402,7 @@
                             </p>
                         </div>
                         <div class="choose-img wow fadeInUp" data-wow-delay=".25s">
-                            <img src="{{ asset('storage/' . $settings->service_image) }}" alt="service image">
+                            <img src="{{ $settings->imageUrl($settings->service_image) }}" alt="service image">
                         </div>
                     </div>
                 </div>
@@ -657,7 +630,76 @@
 
 
 @push('js')
+    {{-- CDN for dual range input --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
     <script>
+        var yearRangeSlider = document.getElementById('yearRangeSlider');
+        var runningYear = new Date().getFullYear();
+        var startYear = runningYear - 20;
+
+        noUiSlider.create(yearRangeSlider, {
+            start: [startYear, runningYear],
+            connect: true,
+            range: {
+                'min': startYear,
+                'max': runningYear
+            },
+            step: 1
+        });
+
+        yearRangeSlider.noUiSlider.on('update', function(values, handle) {
+            var fromYear = parseInt(values[0]);
+            var toYear = parseInt(values[1]);
+
+            document.getElementById('yearRangeValue').innerText = fromYear + ' - ' + toYear;
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#brand_id').on('change', function() {
+                let brandId = $(this).val();
+                let modelSelect = $('#model_id');
+
+                modelSelect.empty().append('<option value="">All Models</option>');
+
+                if (!brandId) return;
+
+                $.ajax({
+                    url: "{{ route('getModels') }}",
+                    type: "GET",
+                    data: {
+                        brand_id: brandId
+                    },
+                    success: function(response) {
+                        if (response.status) {
+
+                            let modelSelect = $('#model_id');
+
+                            // 1️⃣ clear first
+                            modelSelect.empty().append('<option value="">All Models</option>');
+
+                            // 2️⃣ append options
+                            $.each(response.models, function(index, model) {
+                                modelSelect.append(
+                                    `<option value="${model.id}">${model.name}</option>`
+                                );
+                            });
+
+                            // 3️⃣ refresh select2 / UI
+                            modelSelect.trigger('change');
+                            console.log($('#model_id option').length);
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
+    {{-- <script>
         $(document).ready(function() {
             $("#load-more").click(function() {
                 let offset = $('.car-list-item').length;
@@ -678,5 +720,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endpush

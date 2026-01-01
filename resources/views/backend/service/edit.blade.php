@@ -103,7 +103,7 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('service_description', {
             removePlugins: 'exportpdf'
