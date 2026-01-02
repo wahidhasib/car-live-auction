@@ -662,9 +662,18 @@
                 let brandId = $(this).val();
                 let modelSelect = $('#model_id');
 
+                // Destroy nice-select before updating
+                if (modelSelect.next().hasClass('nice-select')) {
+                    modelSelect.niceSelect('destroy');
+                }
+
                 modelSelect.empty().append('<option value="">All Models</option>');
 
-                if (!brandId) return;
+                if (!brandId) {
+                    // Reinitialize nice-select with default option
+                    modelSelect.niceSelect();
+                    return;
+                }
 
                 $.ajax({
                     url: "{{ route('getModels') }}",
@@ -673,24 +682,22 @@
                         brand_id: brandId
                     },
                     success: function(response) {
-                        if (response.status) {
-
-                            let modelSelect = $('#model_id');
-
-                            // 1️⃣ clear first
-                            modelSelect.empty().append('<option value="">All Models</option>');
-
-                            // 2️⃣ append options
+                        if (response.status && response.models.length > 0) {
+                            // Append new options
                             $.each(response.models, function(index, model) {
                                 modelSelect.append(
                                     `<option value="${model.id}">${model.name}</option>`
                                 );
                             });
-
-                            // 3️⃣ refresh select2 / UI
-                            modelSelect.trigger('change');
-                            console.log($('#model_id option').length);
                         }
+
+                        // Reinitialize nice-select with updated options
+                        modelSelect.niceSelect();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading models:', error);
+                        // Reinitialize nice-select even on error
+                        modelSelect.niceSelect();
                     }
                 });
             });
