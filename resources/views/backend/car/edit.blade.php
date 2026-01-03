@@ -23,20 +23,46 @@
                                 <label for="name" class="form-label">Car Name</label>
                                 <input type="text" name="name" id="name" class="form-control"
                                     value="{{ $car->name }}" required>
+                                @error('name')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Brand --}}
                             <div class="mt-2 col-lg-6">
-                                <label for="brand_id" class="form-label">Brand</label>
-                                <select name="brand_id" id="brand_id" class="form-select" required>
-                                    <option value="">Select Brand</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            {{ $car->brand_id == $brand->id ? 'selected' : '' }}>
-                                            {{ $brand->brand_title }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="brand_id" class="form-label">Brand</label>
+                                        <select name="brand_id" id="brand_id" class="form-select" required>
+                                            <option value="">Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}"
+                                                    {{ $car->brand_id == $brand->id ? 'selected' : '' }}>
+                                                    {{ $brand->brand_title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand_id')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="model_id" class="form-label">Model</label>
+                                        <select name="model_id" id="model_id"
+                                            class="form-select @error('model_id') is-invalid @enderror">
+                                            @forelse ($carModels as $model)
+                                                <option value="{{ $model->id }}"
+                                                    {{ $model->id == $car->model_id ? 'selected' : '' }}>{{ $model->title }}
+                                                </option>
+                                            @empty
+                                                <option value="">Select brand first</option>
+                                            @endforelse
+                                        </select>
+                                        @error('model_id')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- Rating --}}
@@ -49,6 +75,9 @@
                                     <option value="4" {{ $car->rating == 4 ? 'selected' : '' }}>4 Star</option>
                                     <option value="5" {{ $car->rating == 5 ? 'selected' : '' }}>5 Star</option>
                                 </select>
+                                @error('rating')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Body Type --}}
@@ -63,6 +92,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('body_type')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Condition --}}
@@ -74,6 +106,9 @@
                                     </option>
                                     <option value="3" {{ $car->condition == 3 ? 'selected' : '' }}>Used</option>
                                 </select>
+                                @error('condition')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Milage --}}
@@ -81,6 +116,9 @@
                                 <label for="milage" class="form-label">Milage</label>
                                 <input type="text" name="milage" id="milage" class="form-control"
                                     value="{{ $car->milage }}" required>
+                                @error('milage')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Transmission --}}
@@ -92,6 +130,9 @@
                                         Automatic</option>
                                     <option value="Manual" {{ $car->transmission == 'Manual' ? 'selected' : '' }}>Manual
                                     </option>
+                                    @error('transmission')
+                                        <div class="mt-1 text-danger">{{ $message }}</div>
+                                    @enderror
                                 </select>
                             </div>
 
@@ -100,6 +141,9 @@
                                 <label for="year" class="form-label">Year</label>
                                 <input type="text" name="year" id="year" class="form-control"
                                     value="{{ $car->year }}" required>
+                                @error('year')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Fuel Type --}}
@@ -111,11 +155,15 @@
                                     </option>
                                     <option value="Diesel" {{ $car->fuel_type == 'Diesel' ? 'selected' : '' }}>Diesel
                                     </option>
-                                    <option value="Electric" {{ $car->fuel_type == 'Electric' ? 'selected' : '' }}>Electric
+                                    <option value="Electric" {{ $car->fuel_type == 'Electric' ? 'selected' : '' }}>
+                                        Electric
                                     </option>
                                     <option value="Hybrid" {{ $car->fuel_type == 'Hybrid' ? 'selected' : '' }}>Hybrid
                                     </option>
                                 </select>
+                                @error('fuel_type')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Color --}}
@@ -123,6 +171,9 @@
                                 <label for="color" class="form-label">Color</label>
                                 <input type="text" name="color" id="color" class="form-control"
                                     value="{{ $car->color }}" required>
+                                @error('color')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Doors --}}
@@ -130,6 +181,9 @@
                                 <label for="doors" class="form-label">Doors</label>
                                 <input type="number" name="doors" id="doors" class="form-control"
                                     value="{{ $car->doors }}" min="2" max="5" required>
+                                @error('doors')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Cylinders --}}
@@ -137,6 +191,9 @@
                                 <label for="cylenders" class="form-label">Cylinders</label>
                                 <input type="number" name="cylenders" id="cylenders" class="form-control"
                                     value="{{ $car->cylenders }}" required>
+                                @error('cylenders')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Engine --}}
@@ -144,6 +201,9 @@
                                 <label for="engine" class="form-label">Engine (cc)</label>
                                 <input type="number" name="engine" id="engine" class="form-control"
                                     value="{{ $car->engine }}" required>
+                                @error('engine')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- VIN Number --}}
@@ -151,6 +211,9 @@
                                 <label for="vin_number" class="form-label">VIN Number</label>
                                 <input type="text" name="vin_number" id="vin_number" class="form-control"
                                     value="{{ $car->vin_number }}">
+                                @error('vin_number')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Price --}}
@@ -158,12 +221,21 @@
                                 <label for="price" class="form-label">Price</label>
                                 <input type="text" name="price" id="price" class="form-control"
                                     value="{{ $car->price }}" required>
+                                @error('price')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Images --}}
                             <div class="mt-2 col-lg-6">
                                 <label for="images" class="form-label">Car Images</label>
                                 <input type="file" name="images[]" id="images" class="form-control" multiple>
+                                @error('images')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
+                                @error('images.*')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                                 <small>You can upload multiple images (max 5). Each under 3MB.</small>
                             </div>
 
@@ -171,6 +243,9 @@
                             <div class="mt-2 col-lg-12">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea name="description" id="description" rows="4" class="form-control">{{ $car->description }}</textarea>
+                                @error('description')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- SEO --}}
@@ -182,18 +257,27 @@
                                 <label for="meta_title" class="form-label">Meta Title</label>
                                 <input type="text" name="meta_title" id="meta_title" class="form-control"
                                     value="{{ $car->meta_title }}">
+                                @error('meta_title')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mt-2 col-lg-4">
                                 <label for="meta_description" class="form-label">Meta Description</label>
                                 <input type="text" name="meta_description" id="meta_description" class="form-control"
                                     value="{{ $car->meta_description }}">
+                                @error('meta_description')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mt-2 col-lg-4">
                                 <label for="meta_keywords" class="form-label">Meta Keywords</label>
                                 <input type="text" name="meta_keywords" id="meta_keywords" class="form-control"
                                     value="{{ $car->meta_keywords }}">
+                                @error('meta_keywords')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
@@ -210,6 +294,40 @@
 @endsection
 
 @push('script')
+    <script>
+        $(document).ready(function() {
+            $("#brand_id").on('change', function() {
+                let brandId = $(this).val();
+                let modelSelect = $("#model_id");
+
+                // 🔥 Clear old options
+                modelSelect.html('');
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('getModels') }}",
+                    data: {
+                        brand_id: brandId,
+                    },
+                    success: function(response) {
+                        if (response.status && response.models.length > 0) {
+                            // Append new options
+                            $.each(response.models, function(index, model) {
+                                modelSelect.append(
+                                    `<option value="${model.id}">${model.title}</option>`
+                                );
+                            });
+                        } else {
+                            modelSelect.append(
+                                `<option value="" selected disabled>No model found</option>`
+                            );
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('description', {

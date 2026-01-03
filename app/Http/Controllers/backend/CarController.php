@@ -8,6 +8,7 @@ use App\Http\Requests\CarUpdateRequest;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarImage;
+use App\Models\CarModel;
 use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -94,8 +95,11 @@ class CarController extends Controller
     {
         $brands = Brand::all();
         $categories = Category::all();
-        $car = Car::with(['brand:id,brand_title', 'category:id,category_name'])->findOrFail($id);
-        return view('backend.car.edit', compact('brands', 'categories', 'car'));
+        $car = Car::with(['brand:id,brand_title', 'category:id,category_name'])
+            ->findOrFail($id);
+        $carModels = CarModel::select('id', 'title', 'brand_id')->where('brand_id', $car->brand_id)->get();
+
+        return view('backend.car.edit', compact('brands', 'categories', 'car', 'carModels'));
     }
 
     /**

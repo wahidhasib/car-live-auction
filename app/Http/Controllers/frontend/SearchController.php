@@ -69,12 +69,28 @@ class SearchController extends Controller
             'images:id,car_id,image_path'
         ])->latest();
 
-        $query->when($request->brand_id, fn($q) => $q->where('brand_id', $request->brand_id));
-        $query->when($request->body_type, fn($q) => $q->where('body_type', $request->body_type));
-        $query->when($request->year, fn($q) => $q->where('year', $request->year));
-        $query->when($request->condition, fn($q) => $q->where('condition', $request->condition));
+        // Convert year string to array
+        $years = $request->year ? explode(',', $request->year) : null;
 
-        // Normal pagination with page numbers
+        // Convert year string to array
+        $years = $request->year ? explode(',', $request->year) : null;
+
+        $query->when($request->brand_id, function ($q) use ($request) {
+            $q->where('brand_id', $request->brand_id);
+        });
+
+        $query->when($request->model_id, function ($q) use ($request) {
+            $q->where('model_id', $request->model_id);
+        });
+
+        $query->when($years && count($years) === 2, function ($q) use ($years) {
+            $q->whereBetween('year', [$years[0], $years[1]]);
+        });
+
+        $query->when($request->condition, function ($q) use ($request) {
+            $q->where('condition', $request->condition);
+        });
+
         $filterCars = $query->paginate(8)->withQueryString();
 
         return view('frontend.filter-cars', compact('filterCars'));

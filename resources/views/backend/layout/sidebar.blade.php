@@ -55,6 +55,19 @@
                 </div>
             </li>
             <li
+                class="menu-item has-submenu {{ request()->routeIs('admin.brand.*') | request()->routeIs('admin.model.*') ? 'active' : '' }}">
+                <a class="menu-link" href="#">
+                    <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brand & Models</span>
+                </a>
+                <div class="submenu">
+                    <a class="{{ request()->routeIs('admin.brand.*') ? 'active' : '' }}"
+                        href="{{ route('admin.brand.index') }}">Brands</a>
+                    <a class="{{ request()->routeIs('admin.model.*') ? 'active' : '' }}"
+                        href="{{ route('admin.model.index') }}">Models</a>
+                </div>
+            </li>
+            <li
                 class="menu-item has-submenu {{ request()->routeIs('admin.car.index') | request()->routeIs('admin.car.create') ? 'active' : '' }}">
                 <a class="menu-link" href="#">
                     <i class="icon material-icons md-shopping_cart"></i>
@@ -72,10 +85,6 @@
                     <i class="icon material-icons md-comment"></i>
                     <span class="text">Testimonials</span>
                 </a>
-            </li>
-            <li class="menu-item {{ request()->routeIs('admin.brand.index') ? 'active' : '' }}">
-                <a class="menu-link" href="{{ route('admin.brand.index') }}"> <i
-                        class="icon material-icons md-stars"></i> <span class="text">Brands</span> </a>
             </li>
         </ul>
         <hr />

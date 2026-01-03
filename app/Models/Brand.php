@@ -10,4 +10,9 @@ class Brand extends Model
         'brand_title',
         'brand_logo'
     ];
+
+    public function models()
+    {
+        return $this->hasMany(CarModel::class);
+    }
 }

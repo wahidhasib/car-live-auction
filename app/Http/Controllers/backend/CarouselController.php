@@ -35,14 +35,11 @@ class CarouselController extends Controller
         $data = $request->validate([
             'carousel_status' => 'required|integer|min:1',
             'carousel_image' => 'required|image|mimes:png,jpg,jpeg,gif',
-            'carousel_background' => 'nullable|image|mimes:png,jpg,jpeg,gif',
         ]);
 
         try {
-            foreach (['carousel_image', 'carousel_background'] as $image) {
-                if ($request->hasFile($image)) {
-                    $data[$image] = uploadFiles($request->file($image), 'uploads/carousel');
-                }
+            if ($request->hasFile('carousel_image')) {
+                $data['carousel_image'] = uploadFiles($request->file('carousel_image'), 'uploads/carousel');
             }
 
             Carousel::create($data);
@@ -81,16 +78,16 @@ class CarouselController extends Controller
         $data = $request->validate([
             'carousel_status' => 'required|integer|min:1',
             'carousel_image' => 'nullable|image|mimes:png,jpg,jpeg,gif',
-            'carousel_background' => 'nullable|image|mimes:png,jpg,jpeg,gif',
         ]);
 
         try {
             $carousel = Carousel::findOrFail($id);
 
-            $oldImage = public_path('storage/' . $carousel->carousel_image);
 
-            if (file_exists($oldImage)) {
-                unlink($oldImage);
+            if ($request->hasFile('carousel_image')) {
+                $oldImage = public_path('storage/' . $carousel->carousel_image);
+
+                $data['carousel_image'] = uploadFiles($request->file('carousel_image'), 'uploads/carousel', $oldImage);
             }
 
             $carousel->update($data);

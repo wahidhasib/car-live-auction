@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\backend\CarController;
 use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\ModelController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TestimonialController;
 use App\Http\Controllers\frontend\CompareController;
@@ -91,6 +92,8 @@ Route::prefix('admin')->as('admin.')->middleware('rolemanager:admin')->group(fun
         Route::resource('/carousel', CarouselController::class);
         // Brand controller
         Route::resource('/brand', BrandController::class);
+        // Brand controller
+        Route::resource('/model', ModelController::class);
         // Testimonial controller
         Route::resource('/testimonial', TestimonialController::class);
         // Category Controller

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\CarModel;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Service;
@@ -54,9 +55,9 @@ class FrontendPageController extends Controller
 
     public function getModels(Request $request)
     {
-        $models = Car::select('id', 'name')
+        $models = CarModel::select('id', 'title', 'brand_id')
             ->where('brand_id', $request->brand_id)
-            ->orderBy('name')
+            ->orderBy('title')
             ->get();
 
         return response()->json([
@@ -152,7 +153,7 @@ class FrontendPageController extends Controller
                                 <ul class="car-list">
                                     <li><i class="far fa-steering-wheel"></i>' . $car->transmission . '</li>
                                     <li><i class="far fa-road"></i>' . $car->milage . '</li>
-                                    <li><i class="far fa-car"></i>Model: ' . $car->year . '</li>
+                                    <li><i class="far fa-calendar-alt"></i>Year: ' . $car->year . '</li>
                                     <li><i class="far fa-gas-pump"></i>' . $car->category->category_name . '</li>
                                 </ul>
 

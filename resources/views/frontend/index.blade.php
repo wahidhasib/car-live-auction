@@ -117,6 +117,7 @@
                         <div class="col-lg-3">
                             <div class="slider-container">
                                 <label for="yearRange">Year Range: <span id="yearRangeValue"></span></label>
+                                <input type="hidden" class="yearRangeValue" name="year">
                                 <div id="yearRangeSlider"></div>
                             </div>
                         </div>
@@ -299,7 +300,7 @@
                                     <ul class="car-list">
                                         <li><i class="far fa-steering-wheel"></i>{{ $car->transmission }}</li>
                                         <li><i class="far fa-road"></i>{{ $car->milage }}</li>
-                                        <li><i class="far fa-car"></i>Model: {{ $car->year }}</li>
+                                        <li><i class="far fa-calendar-alt"></i>Year: {{ $car->year }}</li>
                                         <li><i class="far fa-gas-pump"></i>{{ $car->category->category_name }}</li>
                                     </ul>
                                     <div class="car-footer">
@@ -652,6 +653,7 @@
             var toYear = parseInt(values[1]);
 
             document.getElementById('yearRangeValue').innerText = fromYear + ' - ' + toYear;
+            document.querySelector('.yearRangeValue').value = fromYear + ',' + toYear;
         });
     </script>
 
@@ -661,6 +663,9 @@
             $('#brand_id').on('change', function() {
                 let brandId = $(this).val();
                 let modelSelect = $('#model_id');
+
+                // 🔥 Clear old options
+                modelSelect.html('');
 
                 // Destroy nice-select before updating
                 if (modelSelect.next().hasClass('nice-select')) {
@@ -686,9 +691,13 @@
                             // Append new options
                             $.each(response.models, function(index, model) {
                                 modelSelect.append(
-                                    `<option value="${model.id}">${model.name}</option>`
+                                    `<option value="${model.id}">${model.title}</option>`
                                 );
                             });
+                        } else {
+                            modelSelect.append(
+                                `<option value="" disabled>No model found</option>`
+                            );
                         }
 
                         // Reinitialize nice-select with updated options

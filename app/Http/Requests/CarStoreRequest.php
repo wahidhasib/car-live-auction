@@ -24,6 +24,7 @@ class CarStoreRequest extends FormRequest
         return [
             'name'            => 'required|string|max:255',
             'brand_id'        => 'required|exists:brands,id',
+            'model_id'        => 'required|exists:car_models,id',
             'rating'          => 'required|integer|min:1|max:5',
             'description'     => 'required|string|min:20',
             'price'           => 'required|numeric|min:0',

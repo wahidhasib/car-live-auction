@@ -77,7 +77,7 @@
                                             <ul class="car-list">
                                                 <li><i class="far fa-steering-wheel"></i>{{ $car->transmission }}</li>
                                                 <li><i class="far fa-road"></i>{{ $car->milage }}</li>
-                                                <li><i class="far fa-car"></i>Model: {{ $car->year }}</li>
+                                                <li><i class="far fa-calendar-alt"></i>Year: {{ $car->year }}</li>
                                                 <li><i class="far fa-gas-pump"></i>{{ $car->category->category_name }}</li>
                                             </ul>
                                             <div class="car-footer">

@@ -29,20 +29,34 @@
 
                             {{-- Brand --}}
                             <div class="mt-2 col-lg-6">
-                                <label for="brand_id" class="form-label">Brand</label>
-                                <select name="brand_id" id="brand_id"
-                                    class="form-select @error('brand_id') is-invalid @enderror" required>
-                                    <option value="">Select Brand</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
-                                            {{ $brand->brand_title }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('brand_id')
-                                    <div class="mt-1 text-danger">{{ $message }}</div>
-                                @enderror
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="brand_id" class="form-label">Brand</label>
+                                        <select name="brand_id" id="brand_id"
+                                            class="form-select @error('brand_id') is-invalid @enderror" required>
+                                            <option value="" selected disabled>Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}"
+                                                    {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                                    {{ $brand->brand_title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand_id')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="model_id" class="form-label">Model</label>
+                                        <select name="model_id" id="model_id"
+                                            class="form-select @error('model_id') is-invalid @enderror">
+                                            <option selected disabled value="">Select brand first</option>
+                                        </select>
+                                        @error('model_id')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- Rating --}}
@@ -156,8 +170,8 @@
                             <div class="mt-2 col-lg-6">
                                 <label for="color" class="form-label">Color</label>
                                 <input type="text" name="color" id="color" placeholder="e.g., Red"
-                                    class="form-control @error('color') is-invalid @enderror" value="{{ old('color') }}"
-                                    required>
+                                    class="form-control @error('color') is-invalid @enderror"
+                                    value="{{ old('color') }}" required>
                                 @error('color')
                                     <div class="mt-1 text-danger">{{ $message }}</div>
                                 @enderror
@@ -295,6 +309,39 @@
 @endsection
 
 @push('script')
+    <script>
+        $(document).ready(function() {
+            $("#brand_id").on('change', function() {
+                let brandId = $(this).val();
+                let modelSelect = $("#model_id");
+
+                // 🔥 Clear old options
+                modelSelect.html('');
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('getModels') }}",
+                    data: {
+                        brand_id: brandId,
+                    },
+                    success: function(response) {
+                        if (response.status && response.models.length > 0) {
+                            // Append new options
+                            $.each(response.models, function(index, model) {
+                                modelSelect.append(
+                                    `<option value="${model.id}">${model.title}</option>`
+                                );
+                            });
+                        } else {
+                            modelSelect.append(
+                                `<option value="" selected disabled>No model found</option>`
+                            );
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('description', {
