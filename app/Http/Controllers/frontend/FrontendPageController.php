@@ -241,6 +241,23 @@ class FrontendPageController extends Controller
         return view('frontend.contact');
     }
 
+    public function blogsPage()
+    {
+        $blogs = Blog::latest()->paginate(12);
+        return view('frontend.blogs', compact('blogs'));
+    }
+
+    public function singleBlog(string $slug)
+    {
+        $blog = Blog::where('blog_slug', $slug)->firstOrFail();
+        $recentBlogs = Blog::select('id', 'blog_title', 'blog_slug', 'blog_image', 'created_at')
+            ->where('id', '!=', $blog->id)
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('frontend.single-blog', compact('blog', 'recentBlogs'));
+    }
 
     public function calculateEMI(Request $request)
     {
@@ -275,6 +292,12 @@ class FrontendPageController extends Controller
 
         // Fallback (non-ajax)
         return back()->with('emi', round($EMI));
+    }
+
+    public function happyClient(int $id)
+    {
+        $review = Testimonial::findOrFail($id);
+        return view('frontend.single-testimonial', compact('review'));
     }
 
     public function commingSoonPage()

@@ -40,21 +40,26 @@ Route::controller(FrontendPageController::class)->group(function () {
     Route::get('/emi-calculator', 'calculatorPage')->name('calculator');
     Route::post('/calculate-emi', 'calculateEMI')->name('calculate');
     Route::get('/comming-soon', 'commingSoonPage')->name('commingsoon');
-    Route::resource('reviews', ReviewController::class);
+    Route::get('/blogs', 'blogsPage')->name('blogsPage');
+    Route::get('/blogs/{slug}', 'singleBlog')->name('singleBlog');
 
-    // Search controller
-    Route::controller(SearchController::class)->name('search.')->group(function () {
-        Route::get('/search-ajax', 'headerSearch')->name('ajax');
-        Route::get('/search-cars', 'filterCars')->name('filter');
-    });
+    Route::get('/testimonials/{id}', 'happyClient')->name('happyClient');
+});
 
-    // Compare controller 
-    Route::controller(CompareController::class)->prefix('compare')->name('compare.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/add', 'addToCompare')->name('add');
-        Route::post('/remove', 'removeFromCompare')->name('remove');
-        Route::get('/count', 'countCompareItems')->name('count');
-    });
+Route::resource('reviews', ReviewController::class);
+
+// Search controller
+Route::controller(SearchController::class)->name('search.')->group(function () {
+    Route::get('/search-ajax', 'headerSearch')->name('ajax');
+    Route::get('/search-cars', 'filterCars')->name('filter');
+});
+
+// Compare controller 
+Route::controller(CompareController::class)->prefix('compare')->name('compare.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/add', 'addToCompare')->name('add');
+    Route::post('/remove', 'removeFromCompare')->name('remove');
+    Route::get('/count', 'countCompareItems')->name('count');
 });
 
 Route::controller(WishListController::class)->group(function () {

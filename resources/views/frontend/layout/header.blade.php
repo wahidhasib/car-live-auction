@@ -91,6 +91,9 @@
                                 class="nav-link {{ request()->routeIs('testimonials') ? 'active' : '' }}"
                                 href="{{ route('testimonials') }}">Testimonials</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogsPage') ? 'active' : '' }}"
+                                href="{{ route('blogsPage') }}">blogs</a>
+                        </li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
                                 href="{{ route('contact') }}">Contact</a></li>
                     </ul>
@@ -99,7 +102,8 @@
                             <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
                         </div>
                         <div class="cart-btn wishlist-btn">
-                            <a class="nav-right-link"><i class="far fa-heart"></i><span class="count-item">0</span></a>
+                            <a class="nav-right-link"><i class="far fa-heart"></i><span
+                                    class="count-item">0</span></a>
                         </div>
                         <div class="cart-btn compare-btn p-0">
                             <a href="{{ route('compare.index') }}" class="nav-right-link"><i

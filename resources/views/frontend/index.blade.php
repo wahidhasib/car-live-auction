@@ -520,7 +520,7 @@
             </div>
             <div class="testimonial-slider owl-carousel owl-theme">
                 @forelse ($testimonials as $testimonial)
-                    <div class="testimonial-single">
+                    <a href="{{ route('happyClient', $testimonial->id) }}" class="testimonial-single">
                         <div class="testimonial-content">
                             <div class="testimonial-author-img">
                                 <img src="{{ asset('storage/' . $testimonial->image) }}"
@@ -534,7 +534,7 @@
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                {{ $testimonial->comment }}
+                                {{ Str::limit($testimonial->comment, 80, '...') }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -542,7 +542,7 @@
                                 <i class="fas fa-star"></i>
                             @endfor
                         </div>
-                    </div>
+                    </a>
                 @empty
                     <div class="testimonial-single">
                         <div class="testimonial-content">
@@ -611,9 +611,10 @@
                                         </ul>
                                     </div>
                                     <h4 class="blog-title">
-                                        <a href="#">{{ Str::limit($blog->blog_title, 40, '...') }}</a>
+                                        <a
+                                            href="{{ route('singleBlog', $blog->blog_slug) }}">{{ Str::limit($blog->blog_title, 40, '...') }}</a>
                                     </h4>
-                                    <a class="theme-btn" href="#">Read More<i
+                                    <a class="theme-btn" href="{{ route('singleBlog', $blog->blog_slug) }}">Read More<i
                                             class="fas fa-arrow-right-long"></i></a>
                                 </div>
                             </div>
