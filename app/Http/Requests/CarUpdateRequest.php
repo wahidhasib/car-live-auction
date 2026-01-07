@@ -47,6 +47,9 @@ class CarUpdateRequest extends FormRequest
             'meta_description' => 'nullable|string|max:255',
             'meta_keywords'    => 'nullable|string|max:255',
 
+            // main image
+            'main_image'       => 'nullable|image|mimes:png,jpg,webp:max:4096',
+
             // Images
             'images'           => 'nullable|array|max:10',
             'images.*'         => 'image|mimes:jpeg,png,jpg,webp|max:4096',

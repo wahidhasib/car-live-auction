@@ -44,11 +44,8 @@
                                         <div class="car-img">
                                             <span
                                                 class="car-status status-{{ $conditions[$car->condition]['class'] }}">{{ $conditions[$car->condition]['label'] }}</span>
-                                            @php
-                                                $imagePath = $car->images->first()->image_path ?? null;
-                                            @endphp
-                                            @if ($imagePath && file_exists(public_path('storage/' . $imagePath)))
-                                                <img class="primary-img" src="{{ asset('storage/' . $imagePath) }}"
+                                            @if ($car->main_image && file_exists(public_path('storage/' . $car->main_image)))
+                                                <img class="primary-img" src="{{ asset('storage/' . $car->main_image) }}"
                                                     alt="{{ $car->name }}">
                                             @else
                                                 <img class="primary-img" src="{{ asset('frontend/img/car/01.jpg') }}"
@@ -56,7 +53,7 @@
                                             @endif
                                             <div class="car-btns">
                                                 <a class="add-to-wishlist" data-id="{{ $car->id }}"
-                                                    data-image="{{ $imagePath }}" data-name="{{ $car->name }}"
+                                                    data-image="{{ $car->main_image }}" data-name="{{ $car->name }}"
                                                     data-brand="{{ $car->brand->brand_title }}"
                                                     data-slug="{{ route('car.details', $car->slug) }}"
                                                     data-category="{{ $car->category->category_name }}"><i
@@ -66,7 +63,9 @@
                                         </div>
                                         <div class="car-content">
                                             <div class="car-top">
-                                                <h4><a href="#">{{ $car->name }}</a></h4>
+                                                <h4><a
+                                                        href="{{ route('car.details', $car->slug) }}">{{ $car->name }}</a>
+                                                </h4>
                                                 <div class="car-rate">
                                                     @for ($i = 0; $i < $car->rating; $i++)
                                                         <i class="fas fa-star"></i>

@@ -10,7 +10,7 @@
         <div class="container">
             <h2 class="breadcrumb-title">Calculator</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ route('home') }}">Home</a></li>
                 <li class="active">Calculator</li>
             </ul>
         </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group">
                                             <input type="number" min="1"
                                                 class="form-control @error('period') is-invalid @enderror" name="period"
-                                                id="period" step="any" placeholder="Month">
+                                                id="period" step="any" placeholder="Year">
                                             @error('period')
                                                 <div class="mt-1 text-danger">{{ $message }}</div>
                                             @enderror

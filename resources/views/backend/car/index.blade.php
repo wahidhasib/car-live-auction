@@ -50,12 +50,9 @@
                                         <td>{{ $car->color }}</td>
                                         <td>{{ $car->engine }}</td>
                                         <td>
-                                            @php
-                                                $imagePath = $car->images->first()->image_path ?? null;
-                                            @endphp
-                                            @if ($imagePath && file_exists(public_path('storage/' . $imagePath)))
-                                                <img src="{{ asset('storage/' . $imagePath) }}" alt="{{ $car->name }}"
-                                                    height="40px" width="40px">
+                                            @if ($car->main_image && file_exists(public_path('storage/' . $car->main_image)))
+                                                <img src="{{ asset('storage/' . $car->main_image) }}"
+                                                    alt="{{ $car->name }}" height="40px" width="40px">
                                             @else
                                                 <img src="{{ asset('frontend/img/car/01.jpg') }}" alt=""
                                                     height="40px" width="40px">

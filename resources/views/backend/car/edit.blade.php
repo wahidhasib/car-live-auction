@@ -188,22 +188,27 @@
 
                             {{-- Cylinders --}}
                             <div class="mt-2 col-lg-6">
-                                <label for="cylenders" class="form-label">Cylinders</label>
-                                <input type="number" name="cylenders" id="cylenders" class="form-control"
-                                    value="{{ $car->cylenders }}" required>
-                                @error('cylenders')
-                                    <div class="mt-1 text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="cylenders" class="form-label">Cylinders</label>
+                                        <input type="number" name="cylenders" id="cylenders"
+                                            class="form-control @error('cylenders') is-invalid @enderror"
+                                            value="{{ $car->cylenders }}" required>
+                                        @error('cylenders')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
-                            {{-- Engine --}}
-                            <div class="mt-2 col-lg-6">
-                                <label for="engine" class="form-label">Engine (cc)</label>
-                                <input type="number" name="engine" id="engine" class="form-control"
-                                    value="{{ $car->engine }}" required>
-                                @error('engine')
-                                    <div class="mt-1 text-danger">{{ $message }}</div>
-                                @enderror
+                                    <div class="col-6">
+                                        <label for="engine" class="form-label">Engine (cc)</label>
+                                        <input type="number" name="engine" id="engine"
+                                            class="form-control @error('engine') is-invalid @enderror"
+                                            value="{{ $car->engine }}" required>
+                                        @error('engine')
+                                            <div class="mt-1 text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- VIN Number --}}
@@ -222,6 +227,18 @@
                                 <input type="text" name="price" id="price" class="form-control"
                                     value="{{ $car->price }}" required>
                                 @error('price')
+                                    <div class="mt-1 text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- Main image --}}
+                            <div class="mt-2 col-lg-6">
+                                <label for="images" class="form-label">Main Image</label>
+                                <input type="file" name="main_image" id="main_image"
+                                    class="form-control @error('main_image') is-invalid @enderror" multiple>
+
+                                {{-- Error message for each uploaded file --}}
+                                @error('main_image')
                                     <div class="mt-1 text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

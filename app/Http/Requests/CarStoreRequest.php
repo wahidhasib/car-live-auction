@@ -47,8 +47,11 @@ class CarStoreRequest extends FormRequest
             'meta_description' => 'nullable|string|max:255',
             'meta_keywords'    => 'nullable|string|max:255',
 
+            // main image
+            'main_image'        => 'required|image|mimes:png,jpg,webp|max:4096',
+
             // Images
-            'images'           => 'required|array|max:10',
+            'images'           => 'nullable|array|max:10',
             'images.*'         => 'image|mimes:jpeg,png,jpg,webp|max:4096',
         ];
     }

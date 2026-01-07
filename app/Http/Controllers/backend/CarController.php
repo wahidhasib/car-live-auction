@@ -52,9 +52,12 @@ class CarController extends Controller
         DB::beginTransaction();
 
         try {
-            $data['slug'] = Str::slug($data['name']);
+            $data['slug'] = Car::generateUniqueSlug($data['name']);
+
+            $data['main_image'] = uploadFiles($request->file('main_image'), 'uploads/cars');
 
             $car = Car::create($data);
+
             Cache::forget('cars');
 
             if ($request->hasFile('images')) {
@@ -116,13 +119,15 @@ class CarController extends Controller
 
             // update slug if name changed
             if ($request->name !== $car->name) {
-                $data['slug'] = Str::slug($request->name);
+                $data['slug'] = Car::generateUniqueSlug($data['name']);
+            }
+
+            if ($request->hasFile('main_image')) {
+                $data['main_image'] = uploadFiles($request->file('main_image'), 'uploads/cars');
             }
 
             // handle new image exist
             $car->update($data);
-
-            Cache::forget('cars');
 
             if ($request->hasFile('images')) {
                 // Delete old imgaes
@@ -146,6 +151,8 @@ class CarController extends Controller
                     ]);
                 }
             }
+
+            Cache::forget('cars');
 
             DB::commit();
             return redirect()->route('admin.car.index')->with('success', 'Car updated successfully!');

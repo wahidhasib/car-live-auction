@@ -4,8 +4,8 @@
             <div class="row footer-widget-wrapper pt-100 pb-70">
                 <div class="col-md-6 col-lg-4">
                     <div class="footer-widget-box about-us">
-                        <a href="#" class="footer-logo">
-                            <img src="{{ $settings->imageUrl('footer_logo', 'frontend/img/logo/logo.png') }}"
+                        <a href="{{ route('home') }}" class="footer-logo">
+                            <img src="{{ $settings->imageUrl($settings->footer_logo, 'frontend/img/logo/logo.png') }}"
                                 alt="{{ $settings->company_name }}" title="{{ $settings->company_name }}" loading="lazy">
                         </a>
                         <p class="mb-3">

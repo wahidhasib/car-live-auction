@@ -141,7 +141,8 @@
             <div class="sidebar-content">
                 <button type="button" class="close-sidebar-popup"><i class="far fa-xmark"></i></button>
                 <div class="sidebar-logo">
-                    <img src="{{ $settings->imageUrl('header_logo', 'frontend/img/logo/logo.png') }}" alt="">
+                    <img src="{{ $settings->imageUrl($settings->header_logo, 'frontend/img/logo/logo.png') }}"
+                        alt="">
                 </div>
                 <div class="sidebar-about">
                     <h4>{{ $settings->about_subtitle }}</h4>

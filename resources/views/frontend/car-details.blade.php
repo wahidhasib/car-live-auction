@@ -9,13 +9,13 @@
     <meta property="og:title" content="{{ $car->meta_title ?? $settings->meta_title }}">
     <meta property="og:description" content="{{ $car->meta_description ?? $settings->meta_description }}">
     <meta property="og:image"
-        content="{{ $car->images->first()->image_path ? asset('storage/' . $car->images->first()->image_path) : asset('storage/' . $settings->header_logo) }}">
+        content="{{ $car->main_image ? asset('storage/' . $car->main_image) : asset('storage/' . $settings->header_logo) }}">
 
     <!-- Twitter -->
     <meta name="twitter:title" content="{{ $car->meta_title ?? $settings->meta_title }}">
     <meta name="twitter:description" content="{{ $car->meta_description ?? $settings->meta_description }}">
     <meta name="twitter:image"
-        content="{{ $car->images->first()->image_path ? asset('storage/' . $car->images->first()->image_path) : asset('storage/' . $settings->header_logo) }}">
+        content="{{ $car->main_image ? asset('storage/' . $car->main_image) : asset('storage/' . $settings->header_logo) }}">
 @endsection
 
 @section('title')
@@ -66,6 +66,10 @@
                                     <div class="item-gallery">
                                         <div class="flexslider-thumbnails">
                                             <ul class="slides">
+                                                <li data-thumb="{{ asset('storage/' . $car->main_image) }}">
+                                                    <img src="{{ asset('storage/' . $car->main_image) }}"
+                                                        alt="{{ $car->meta_title ?? $car->name }}">
+                                                </li>
                                                 @if (count($car->images) > 0)
                                                     @foreach ($car->images as $item)
                                                         <li data-thumb="{{ asset('storage/' . $item->image_path) }}">
