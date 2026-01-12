@@ -194,6 +194,13 @@
 
     </main>
 
+    <div class="whatsapp">
+        <a target="_blank"
+            href="https://wa.me/{{ $settings->phone }}?text=Hello%20I%20am%20interested%20in%20your%20services.%20Please%20share%20more%20details.">
+            <img src="{{ asset('frontend/img/whatsapp.png') }}" alt="whatsapp icon">
+        </a>
+    </div>
+
 
 
     <!-- footer area -->

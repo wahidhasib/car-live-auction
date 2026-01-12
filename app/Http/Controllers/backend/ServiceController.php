@@ -35,7 +35,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'service_title' => 'required|string|max:255',
-            'service_image' => 'required|image|max:2048|mimes:jpg,jpeg,png,gif',
+            'service_image' => 'required|image|max:2048|mimes:jpg,jpeg,png,gif,webp',
             'service_icon' => 'nullable|string|max:255',
             'service_text' => 'required|string|max:255',
             'service_description' => 'required|string',
@@ -94,7 +94,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'service_title' => 'required|string|max:255',
-            'service_image' => 'nullable|image|max:2048|mimes:jpg,jpeg,png,gif',
+            'service_image' => 'nullable|image|max:2048|mimes:jpg,jpeg,png,gif,webp',
             'service_icon' => 'nullable|string|max:255',
             'service_text' => 'required|string|max:255',
             'service_description' => 'required|string',

@@ -8,6 +8,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\helper\fileUpload;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
@@ -48,6 +49,8 @@ class SettingController extends Controller
             }
 
             $setting->update($data);
+
+            Cache::forget('settings');
 
             return redirect()->back()->with(['success' => 'Settings updated successfully!']);
         } catch (\Exception $e) {

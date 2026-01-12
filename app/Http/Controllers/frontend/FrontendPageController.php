@@ -19,25 +19,21 @@ class FrontendPageController extends Controller
 {
     public function homePage()
     {
-        $data['carousels'] = Cache::remember('carousels', 3600, function () {
+        $data['carousels'] = Cache::rememberForever('carousels', function () {
             return Carousel::latest()
                 ->where('carousel_status', 1)
                 ->get();
         });
 
-        $data['brands'] = Cache::remember('brands', 3600, function () {
+        $data['brands'] = Cache::rememberForever('brands', function () {
             return Brand::latest()->get();
         });
 
-        $data['testimonials'] = Cache::remember('testimonials', 3600, function () {
-            return Testimonial::latest()->get();
-        });
-
-        $data['categories'] = Cache::remember('categories', 3600, function () {
+        $data['categories'] = Cache::rememberForever('categories', function () {
             return Category::latest()->get();
         });
 
-        $data['latestBlogs'] = Cache::remember('latest-blogs', 3600, function () {
+        $data['latestBlogs'] = Cache::rememberForever('latest-blogs', function () {
             return Blog::latest()->limit(3)->get();
         });
 
@@ -194,11 +190,11 @@ class FrontendPageController extends Controller
 
     public function aboutPage()
     {
-        $data['testimonials'] = Cache::remember('testimonials', 3600, function () {
+        $data['testimonials'] = Cache::rememberForever('testimonials', function () {
             return Testimonial::latest()->get();
         });
 
-        $data['brands'] = Cache::remember('brands', 3600, function () {
+        $data['brands'] = Cache::rememberForever('brands', function () {
             return Brand::latest()->get();
         });
 
@@ -207,7 +203,7 @@ class FrontendPageController extends Controller
 
     public function servicesPage()
     {
-        $data['services'] = Cache::remember('services', 3600, function () {
+        $data['services'] = Cache::rememberForever('services', function () {
             return Service::latest()->paginate(6);
         });
 
@@ -224,7 +220,7 @@ class FrontendPageController extends Controller
 
     public function testimonialsPage()
     {
-        $testimonials = Cache::remember('testimonials', 3600, function () {
+        $testimonials = Cache::rememberForever('testimonials', function () {
             return Testimonial::latest()->get();
         });
 

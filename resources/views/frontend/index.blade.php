@@ -337,11 +337,12 @@
             <div class="row">
                 @forelse ($categories as $category)
                     <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="category-item wow fadeInUp"
-                            data-wow-delay="{{ $loop->iteration * 0.25 }}s">
+                        <a href="{{ route('search.filter', ['category' => $category->id]) }}"
+                            class="category-item wow fadeInUp" data-wow-delay="{{ $loop->iteration * 0.25 }}s">
                             <div class="category-img">
-                                <img src="{{ $category->category_image }}" alt="{{ $category->category_name }}"
-                                    title="{{ $category->category_name }}" loading="lazy">
+                                <img src="{{ asset('storage/' . $category->category_image) }}"
+                                    alt="{{ $category->category_name }}" title="{{ $category->category_name }}"
+                                    loading="lazy">
                             </div>
                             <h5>{{ $category->category_name }}</h5>
                         </a>
@@ -478,7 +479,7 @@
             <div class="row">
                 @forelse ($brands as $brand)
                     <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp"
+                        <a href="{{ route('search.filter', ['brand' => $brand->id]) }}" class="brand-item wow fadeInUp"
                             data-wow-delay="{{ $loop->iteration * 0.25 }}s">
                             <div class="brand-img">
                                 <img src="{{ asset('storage/' . $brand->brand_logo) }}" alt="{{ $brand->brand_title }}"
@@ -503,79 +504,6 @@
     <!-- car brand end-->
 
 
-    <!-- testimonial area -->
-    <div class="testimonial-area bg py-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="flaticon-drive"></i>
-                            {{ $settings->testimonial_subtitle }}</span>
-                        <h2 class="site-title">{{ Str::beforeLast($settings->testimonial_title, ' ') }}
-                            <span>{{ Str::afterLast($settings->testimonial_title, ' ') }}</span>
-                        </h2>
-                        <div class="heading-divider"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-slider owl-carousel owl-theme">
-                @forelse ($testimonials as $testimonial)
-                    <a href="{{ route('happyClient', $testimonial->id) }}" class="testimonial-single">
-                        <div class="testimonial-content">
-                            <div class="testimonial-author-img">
-                                <img src="{{ asset('storage/' . $testimonial->image) }}"
-                                    alt="{{ $settings->company_name }} - testimonial">
-                            </div>
-                            <div class="testimonial-author-info">
-                                <h4>{{ $testimonial->name }}</h4>
-                                <p>{{ $testimonial->designation }}</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-quote">
-                            <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                            <p>
-                                {{ Str::limit($testimonial->comment, 80, '...') }}
-                            </p>
-                        </div>
-                        <div class="testimonial-rate">
-                            @for ($i = 0; $i < $testimonial->rating; $i++)
-                                <i class="fas fa-star"></i>
-                            @endfor
-                        </div>
-                    </a>
-                @empty
-                    <div class="testimonial-single">
-                        <div class="testimonial-content">
-                            <div class="testimonial-author-img">
-                                <img src="{{ asset('frontend/img/testimonial/01.jpg') }}" alt="">
-                            </div>
-                            <div class="testimonial-author-info">
-                                <h4>Sylvia H Green</h4>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-quote">
-                            <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
-                            <p>
-                                There are many variations of passages available but the majority have suffered to the
-                                alteration in some injected.
-                            </p>
-                        </div>
-                        <div class="testimonial-rate">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-    </div>
-    <!-- testimonial area end -->
-
-
     <!-- blog area -->
     <div class="blog-area py-120">
         <div class="container">
@@ -597,8 +525,8 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
                                 <div class="blog-item-img">
-                                    <img src="{{ asset('storage/' . $blog->blog_image) }}"
-                                        alt="{{ $blog->blog_title }}" title="{{ $blog->blog_title }}" loading="lazy">
+                                    <img src="{{ asset('storage/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}"
+                                        title="{{ $blog->blog_title }}" loading="lazy">
                                 </div>
                                 <div class="blog-item-info">
                                     <div class="blog-item-meta">

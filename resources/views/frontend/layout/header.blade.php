@@ -83,7 +83,7 @@
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Features</a>
                             <ul class="dropdown-menu fade-down">
                                 <li><a class="dropdown-item" href="{{ route('calculator') }}">EMI Calculator</a></li>
-                                <li><a class="dropdown-item" href="{{ route('commingsoon') }}">Cutom Duty</a></li>
+                                <li><a class="dropdown-item" href="{{ route('commingsoon') }}">Custom Duty</a></li>
                                 <li><a class="dropdown-item" href="{{ route('commingsoon') }}">Auction Sheet</a></li>
                             </ul>
                         </li>

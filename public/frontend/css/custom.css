@@ -216,3 +216,31 @@
         display: none;
     }
 }
+
+.whatsapp {
+    position: fixed;
+    right: 25px;
+    bottom: 70px;
+    z-index: 999;
+}
+
+.whatsapp img {
+    height: 70px;
+    width: 70px;
+}
+
+@media screen and (max-width: 1200px) {
+    .whatsapp {
+        bottom: 150px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .whatsapp {
+        bottom: 70px;
+    }
+    .whatsapp img {
+        height: 60px;
+        width: 60px;
+    }
+}

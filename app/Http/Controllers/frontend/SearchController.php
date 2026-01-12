@@ -91,6 +91,18 @@ class SearchController extends Controller
             $q->where('condition', $request->condition);
         });
 
+        $query->when(
+            $request->category,
+            fn($q, $category) =>
+            $q->where('body_type', $category)
+        );
+
+        $query->when(
+            $request->brand,
+            fn($q, $brand) =>
+            $q->where('brand_id', $brand)
+        );
+
         $filterCars = $query->paginate(8)->withQueryString();
 
         return view('frontend.filter-cars', compact('filterCars'));

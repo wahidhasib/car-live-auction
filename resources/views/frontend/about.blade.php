@@ -136,7 +136,7 @@
             </div>
             <div class="testimonial-slider owl-carousel owl-theme">
                 @forelse ($testimonials as $testimonial)
-                    <div class="testimonial-single">
+                    <a href="{{ route('happyClient', $testimonial->id) }}" class="testimonial-single">
                         <div class="testimonial-content">
                             <div class="testimonial-author-img">
                                 <img src="{{ asset('storage/' . $testimonial->image) }}"
@@ -150,7 +150,7 @@
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                {{ $testimonial->comment }}
+                                {{ Str::limit($testimonial->comment, 80, '...') }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -158,7 +158,7 @@
                                 <i class="fas fa-star"></i>
                             @endfor
                         </div>
-                    </div>
+                    </a>
                 @empty
                     <div class="testimonial-single">
                         <div class="testimonial-content">
@@ -305,7 +305,7 @@
             <div class="row">
                 @forelse ($brands as $brand)
                     <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp"
+                        <a href="{{ route('search.filter', ['brand' => $brand->id]) }}" class="brand-item wow fadeInUp"
                             data-wow-delay="{{ $loop->iteration * 0.25 }}s">
                             <div class="brand-img">
                                 <img src="{{ asset('storage/' . $brand->brand_logo) }}" alt="{{ $brand->brand_title }}"

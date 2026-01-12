@@ -34,7 +34,7 @@ class CarouselController extends Controller
     {
         $data = $request->validate([
             'carousel_status' => 'required|integer|min:1',
-            'carousel_image' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'carousel_image' => 'required|image|mimes:png,jpg,jpeg,gif,webp',
         ]);
 
         try {
@@ -77,7 +77,7 @@ class CarouselController extends Controller
     {
         $data = $request->validate([
             'carousel_status' => 'required|integer|min:1',
-            'carousel_image' => 'nullable|image|mimes:png,jpg,jpeg,gif',
+            'carousel_image' => 'nullable|image|mimes:png,jpg,jpeg,gif,webp',
         ]);
 
         try {

@@ -36,7 +36,7 @@ class CategoryController extends Controller
         $data = $request->validate([
             'category_name' => 'required|string|max:50',
             'category_slug' => 'required|string|unique:categories,category_slug',
-            'category_image' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'category_image' => 'required|image|mimes:png,jpg,jpeg,gif,webp',
         ]);
 
         try {
@@ -80,7 +80,7 @@ class CategoryController extends Controller
         $data = $request->validate([
             'category_name' => 'required|string|max:50',
             'category_slug' => 'required|string|unique:categories,category_slug,' . $id,
-            'category_image' => 'nullable|image|mimes:png,jpg,jpeg,gif',
+            'category_image' => 'nullable|image|mimes:png,jpg,jpeg,gif,webp',
         ]);
 
         try {

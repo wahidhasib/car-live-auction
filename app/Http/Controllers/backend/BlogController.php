@@ -36,7 +36,7 @@ class BlogController extends Controller
         $data = $request->validate([
             'blog_title' => 'required|string|max:255',
             'blog_description' => 'required|string',
-            'blog_image' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'blog_image' => 'required|image|mimes:png,jpg,jpeg,gif,webp',
             'author_name' => 'required|string|max:80',
             'designation' => 'required|string|max:50',
             'facebook' => 'nullable|string|max:255',
@@ -97,7 +97,7 @@ class BlogController extends Controller
         $data = $request->validate([
             'blog_title' => 'required|string|max:255',
             'blog_description' => 'required|string',
-            'blog_image' => 'nullable|image|mimes:png,jpg,jpeg,gif',
+            'blog_image' => 'nullable|image|mimes:png,jpg,jpeg,gif,webp',
             'author_name' => 'required|string|max:80',
             'designation' => 'required|string|max:50',
             'facebook' => 'nullable|string|max:255',

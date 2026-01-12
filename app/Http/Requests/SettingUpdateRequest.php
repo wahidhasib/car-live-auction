@@ -30,10 +30,10 @@ class SettingUpdateRequest extends FormRequest
             'footer_text' => 'required|string',
             'address' => 'required|string|max:255',
             'map_link' => 'required|string',
-            'header_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
-            'footer_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
-            'common_bg' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
-            'fav_icon' => 'nullable|image|mimes:jpg,jpeg,png,ico|max:1024',
+            'header_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'footer_logo' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'common_bg' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'fav_icon' => 'nullable|image|mimes:jpg,jpeg,png,ico,webp|max:1024',
             'color_scheme' => 'required|string',
 
             // Footer + Socials
@@ -49,7 +49,7 @@ class SettingUpdateRequest extends FormRequest
             'meta_keywords' => 'required|string|max:255',
 
             // About Section
-            'about_image' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'about_image' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
             'about_subtitle' => 'required|string|max:255',
             'about_title' => 'required|string|max:255',
             'about_message' => 'required|string|max:500',
@@ -71,14 +71,14 @@ class SettingUpdateRequest extends FormRequest
             'category_title' => 'required|string|max:255',
 
             // Banner Section
-            'banner_background' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'banner_background' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
             'video_link' => 'required|url',
 
             // Service Section
             'service_subtitle' => 'required|string|max:255',
             'service_title' => 'required|string|max:255',
             'service_text' => 'required|string',
-            'service_image' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'service_image' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
 
             'service_quality_title' => 'required|string|max:255',
             'service_quality_text' => 'required|string|max:500',
@@ -101,7 +101,7 @@ class SettingUpdateRequest extends FormRequest
             'brand_title' => 'required|string|max:255',
 
             // Contact Section
-            'contact_image' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'contact_image' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
             'form_title' => 'required|string|max:255',
             'form_text' => 'required|string|max:255',
 
