@@ -10,7 +10,6 @@ use App\Models\CarModel;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Service;
-use App\Models\Setting;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -19,6 +18,7 @@ class FrontendPageController extends Controller
 {
     public function homePage()
     {
+        // ConversionAp
         $data['carousels'] = Cache::rememberForever('carousels', function () {
             return Carousel::latest()
                 ->where('carousel_status', 1)

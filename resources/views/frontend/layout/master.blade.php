@@ -116,6 +116,8 @@
 @endverbatim
 </script>
 
+    <x-conversions-api-facebook-pixel-script />
+
 </head>
 
 <body>

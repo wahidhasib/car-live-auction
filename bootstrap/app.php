@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\InitializeFacebookUserData;
 use App\Http\Middleware\RoleManager;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -12,7 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Alias existing
         $middleware->alias(['rolemanager' => RoleManager::class]);
+
+        // 🔥 Alias new
+        $middleware->appendToGroup('web', [
+            InitializeFacebookUserData::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
