@@ -25,6 +25,9 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
+    {{-- Search console --}}
+    <meta name="google-site-verification" content="y3QkJncgs9Ozk-rIjgByJ6WSeqNyhBikmMgVwBXEtGg" />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ {{ $settings->company_name ?? 'Company' }}">

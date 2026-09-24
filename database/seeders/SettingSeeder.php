@@ -25,6 +25,7 @@ class SettingSeeder extends Seeder
             'header_logo' => 'uploads/settings/logo.png',
             'footer_logo' => 'uploads/settings/logo.png',
             'common_bg' => 'uploads/settings/common-bg.jpg',
+            // 'main_image' => 'uploads/settings/common-bg.jpg',
             'fav_icon' => 'uploads/settings/favicon.ico',
             'footer_text' => 'Footer description about the compnay',
             'color_scheme' => '#0BA6DF',

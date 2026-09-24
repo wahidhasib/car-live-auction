@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('doors');
             $table->integer('cylenders');
             $table->integer('engine');
-            $table->string('vin_number')->unique()->nullable();
+            $table->string('vin_number')->nullable();
 
             // SEO
             $table->string('meta_title')->nullable();

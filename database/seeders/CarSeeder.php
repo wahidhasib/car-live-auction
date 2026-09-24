@@ -23,6 +23,7 @@ class CarSeeder extends Seeder
                 'brand_id' => fake()->randomElement($brandId),
                 'rating' => fake()->numberBetween(1, 5),
                 'description' => fake()->paragraph(4),
+                'main_image' => 'uploads/settings/contact.jpg',
                 'price' => fake()->randomFloat(2, 10000, 100000),
                 'body_type' => fake()->numberBetween(1, 2), // assumes categories table has some data
                 'condition' => fake()->numberBetween(1, 3), // 1=new, 2=used, 3=certified
@@ -35,7 +36,7 @@ class CarSeeder extends Seeder
                 'cylenders' => fake()->numberBetween(3, 8),
                 'engine' => fake()->numberBetween(500, 2000),
                 'vin_number' => strtoupper(Str::random(17)),
-                'meta_title' => fake()->paragraph(),
+                'meta_title' => fake()->paragraph(2),
                 'meta_description' => fake()->sentence(10),
                 'meta_keywords' => implode(', ', fake()->words(5)),
                 'created_at' => now(),
